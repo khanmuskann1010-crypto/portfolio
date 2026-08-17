@@ -87,10 +87,10 @@
   @media(max-width:720px){ .placard{grid-template-columns:1fr; height:min(660px,80vh);} }
 
   /* ---------- intro cards (title + headline) share the rolodex mechanic, single column ---------- */
-  /* transparent/frosted so the real WebGL scene behind shows through instead of hiding behind a flat card */
-  .placard.title-card, .placard.headline-card{grid-template-columns:1fr; width:min(1040px,92vw); height:min(640px,78vh); background:transparent; box-shadow:none; border-color:transparent;}
-  .placard.title-card::before{display:none;}
-  .placard.headline-card{background:rgba(250,250,246,0.52); backdrop-filter:blur(20px) saturate(150%); -webkit-backdrop-filter:blur(20px) saturate(150%); border-color:rgba(21,20,15,0.08);}
+  .placard.title-card, .placard.headline-card{grid-template-columns:1fr; width:min(1040px,92vw); height:min(640px,78vh);}
+  /* headline card stays frosted so the WebGL scene shows through behind it;
+     the title card is a plain placard now — same background/shadow/border as the rest */
+  .placard.headline-card{background:rgba(250,250,246,0.52); backdrop-filter:blur(20px) saturate(150%); -webkit-backdrop-filter:blur(20px) saturate(150%); border-color:rgba(21,20,15,0.08); box-shadow:none;}
   .intro-inner{position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:center; padding:56px 64px;}
   @media(max-width:720px){ .intro-inner{padding:40px 30px;} }
   .title-headline{position:relative; z-index:2; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(44px,9vw,116px); line-height:1.0; letter-spacing:-0.02em;}
