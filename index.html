@@ -151,8 +151,11 @@
   .placard-badge{position:absolute; top:14px; left:16px; background:var(--accent); color:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:9px; padding:5px 10px; border-radius:12px; z-index:3; letter-spacing:.04em; font-weight:500;}
 
   .rolo-nav{position:absolute; bottom:26px; left:0; right:0; display:flex; justify-content:center; gap:9px; z-index:10;}
-  .rolo-dot{width:9px; height:9px; border-radius:50%; border:1.5px solid var(--ink); background:transparent; cursor:pointer; transition:all .3s;}
-  .rolo-dot.active{background:var(--accent); border-color:var(--accent); transform:scale(1.25); animation:dotPulse 1.8s ease-in-out infinite;}
+  /* 24x24 hit target (WCAG 2.2 AA minimum) around a 9px visual dot */
+  .rolo-dot{width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;}
+  .rolo-dot::before{content:''; width:9px; height:9px; border-radius:50%; border:1.5px solid var(--ink); background:transparent; transition:all .3s;}
+  .rolo-dot.active::before{background:var(--accent); border-color:var(--accent); transform:scale(1.25); animation:dotPulse 1.8s ease-in-out infinite;}
+  .rolo-dot:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:50%;}
   @keyframes dotPulse{0%,100%{box-shadow:0 0 0 0 rgba(15,107,79,.45);} 50%{box-shadow:0 0 0 7px rgba(15,107,79,0);}}
   .rolo-hint{position:absolute; top:24px; left:0; right:0; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); z-index:10;}
 
@@ -209,7 +212,7 @@
 
   @media (prefers-reduced-motion: reduce){
     #cursor-glow{display:none;}
-    .chip, .cta-btn, .card, .cert-badge .cert-icon, .rolo-dot.active, .eyebrow::before{animation:none !important;}
+    .chip, .cta-btn, .card, .cert-badge .cert-icon, .rolo-dot.active::before, .eyebrow::before{animation:none !important;}
   }
 </style>
 </head>
@@ -223,7 +226,7 @@
   <span class="progress-label" id="nav-progress">SCROLL 00%</span>
 </nav>
 
-<div class="marquee-band">
+<div class="marquee-band" aria-hidden="true">
   <div class="marquee-track" id="marquee">
     <span>ABM</span><span class="sep">•</span><span>GTM Strategy</span><span class="sep">•</span><span>SEO</span><span class="sep">•</span>
     <span>Brevo</span><span class="sep">•</span><span>HubSpot</span><span class="sep">•</span><span>WordPress / Elementor</span><span class="sep">•</span>
@@ -874,14 +877,25 @@
     const n = placards.length;
     if(n === 0) return null;
 
+    function goTo(i){
+      const rect = wrapper.getBoundingClientRect();
+      const wrapperTop = rect.top + window.scrollY;
+      const scrollable = wrapper.offsetHeight - window.innerHeight;
+      window.scrollTo({top: wrapperTop + (i/(n-1))*scrollable, behavior: prefersReduced ? 'auto' : 'smooth'});
+    }
+
     placards.forEach((_,i)=>{
       const dot = document.createElement('div');
       dot.className = 'rolo-dot' + (i===0 ? ' active':'');
-      dot.addEventListener('click', ()=>{
-        const rect = wrapper.getBoundingClientRect();
-        const wrapperTop = rect.top + window.scrollY;
-        const scrollable = wrapper.offsetHeight - window.innerHeight;
-        window.scrollTo({top: wrapperTop + (i/(n-1))*scrollable, behavior:'smooth'});
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
+      dot.setAttribute('aria-label', `Go to card ${i+1} of ${n}`);
+      dot.addEventListener('click', ()=> goTo(i));
+      dot.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          goTo(i);
+        }
       });
       navEl.appendChild(dot);
     });
@@ -942,7 +956,11 @@
         card.style.opacity = opacity.toFixed(2);
         card.style.filter = blurPx > 0 ? `blur(${blurPx.toFixed(1)}px)` : '';
         card.style.zIndex = 100 - Math.round(absDiff*10);
-        card.style.pointerEvents = absDiff < 0.5 ? 'auto' : 'none';
+        const isActive = absDiff < 0.5;
+        card.style.pointerEvents = isActive ? 'auto' : 'none';
+        // inert (not just pointer-events) so a faded/rotated-away card's links
+        // can't still be tabbed to and activated by keyboard while invisible
+        card.inert = !isActive;
       });
 
       if(activeIdxNow !== lastActive){
