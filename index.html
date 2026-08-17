@@ -30,21 +30,8 @@
   nav .progress-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink); letter-spacing:0.08em; text-transform:uppercase; background:var(--paper); padding:9px 14px; border-radius:20px; border:1.5px solid var(--ink);}
   #progress-bar{position:fixed; top:0; left:0; height:3px; background:var(--accent); width:0%; z-index:300; transition:width .08s linear;}
 
-  /* ---------- shared hero-style decorations (now used inside the intro placards) ---------- */
-  .hero-noise{position:absolute; inset:0; z-index:0; opacity:.35; pointer-events:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");}
-  .hero-wordmark{position:absolute; z-index:0; top:52%; left:50%; transform:translate(-50%,-50%); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:min(26vw,340px); line-height:1; letter-spacing:-0.03em; white-space:nowrap; color:transparent; -webkit-text-stroke:1.5px rgba(21,20,15,0.09); user-select:none; pointer-events:none;}
-  .hero-frame{position:absolute; inset:14px; border:1px solid var(--line); z-index:0; pointer-events:none;}
-  .hero-frame::before{content:'MUSKAN K. — PORTFOLIO 2026'; position:absolute; top:-1px; right:0; transform:translateY(-100%); font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.1em; color:var(--muted); padding-bottom:6px;}
-  .hero-orb{position:absolute; z-index:0; width:420px; height:420px; border-radius:50%; background:conic-gradient(from 120deg at 40% 35%, rgba(15,107,79,0.9), rgba(241,174,18,0.35) 30%, rgba(21,20,15,0.05) 55%, rgba(15,107,79,0.55) 80%, rgba(15,107,79,0.9)); opacity:.5; filter:blur(34px); top:-16%; right:-8%; animation:orbFloat 11s ease-in-out infinite;}
-  .hero-orb2{position:absolute; z-index:0; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle at 60% 40%, rgba(241,174,18,0.4), transparent 70%); opacity:.4; filter:blur(20px); bottom:4%; left:2%; animation:orbFloat 13s ease-in-out infinite reverse;}
-  @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-14px,20px) scale(1.05);}}
-  .hero-crosshair{position:absolute; z-index:0; width:14px; height:14px; opacity:.5;}
-  .hero-crosshair::before,.hero-crosshair::after{content:''; position:absolute; background:var(--ink);}
-  .hero-crosshair::before{width:100%; height:1px; top:50%;}
-  .hero-crosshair::after{height:100%; width:1px; left:50%;}
-  .hero-crosshair.c1{bottom:64px; left:28px;}
-  .hero-crosshair.c2{top:56px; left:44%;}
+  /* ---------- the always-present, real-lit WebGL backdrop ---------- */
+  #world-3d{position:fixed; inset:0; z-index:-80; width:100%; height:100%; pointer-events:none;}
   .eyebrow{position:relative; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:10px;}
   .eyebrow::before{content:''; width:26px; height:2px; background:var(--accent); display:inline-block; animation:eyebrowPulse 2.6s ease-in-out infinite;}
   @keyframes eyebrowPulse{0%,100%{opacity:1; width:26px;} 50%{opacity:.45; width:34px;}}
@@ -100,7 +87,10 @@
   @media(max-width:720px){ .placard{grid-template-columns:1fr; height:min(660px,80vh);} }
 
   /* ---------- intro cards (title + headline) share the rolodex mechanic, single column ---------- */
-  .placard.title-card, .placard.headline-card{grid-template-columns:1fr; width:min(1040px,92vw); height:min(640px,78vh);}
+  /* transparent/frosted so the real WebGL scene behind shows through instead of hiding behind a flat card */
+  .placard.title-card, .placard.headline-card{grid-template-columns:1fr; width:min(1040px,92vw); height:min(640px,78vh); background:transparent; box-shadow:none; border-color:transparent;}
+  .placard.title-card::before{display:none;}
+  .placard.headline-card{background:rgba(250,250,246,0.52); backdrop-filter:blur(20px) saturate(150%); -webkit-backdrop-filter:blur(20px) saturate(150%); border-color:rgba(21,20,15,0.08);}
   .intro-inner{position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:center; padding:56px 64px;}
   @media(max-width:720px){ .intro-inner{padding:40px 30px;} }
   .title-headline{position:relative; z-index:2; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(44px,9vw,116px); line-height:1.0; letter-spacing:-0.02em;}
@@ -218,6 +208,7 @@
 </head>
 <body>
 
+<canvas id="world-3d" aria-hidden="true"></canvas>
 <div id="cursor-glow" aria-hidden="true"></div>
 
 <div id="progress-bar"></div>
@@ -241,8 +232,6 @@
 
     <div class="placard title-card" data-i="0" data-motion="swirl">
       <div class="intro-inner title-inner">
-        <div class="hero-noise"></div>
-        <div class="hero-orb2"></div>
         <div class="eyebrow">Portfolio — 2026</div>
         <h1 class="title-headline">Muskan <em>Portfolio</em></h1>
       </div>
@@ -250,13 +239,6 @@
 
     <div class="placard headline-card" data-i="1" data-motion="tumble">
       <div class="intro-inner">
-        <div class="hero-noise"></div>
-        <div class="hero-wordmark">MUSKAN</div>
-        <div class="hero-orb"></div>
-        <div class="hero-orb2"></div>
-        <div class="hero-frame"></div>
-        <div class="hero-crosshair c1"></div>
-        <div class="hero-crosshair c2"></div>
         <div class="eyebrow">Growth &amp; Marketing Communications</div>
         <h1 class="headline">
           <span class="line"><span>Four chapters of</span></span>
@@ -805,7 +787,7 @@
 <script>
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  window.__mx = 0; window.__my = 0; window.__scrollFrac = 0;
+  window.__mx = 0; window.__my = 0; window.__scrollFrac = 0; window.__mainRoloProgress = 0;
 
   const progressBar = document.getElementById('progress-bar');
   const navProgress = document.getElementById('nav-progress');
@@ -908,6 +890,10 @@
       let scrolled = -rect.top;
       scrolled = Math.min(scrollable, Math.max(0, scrolled));
       const progress = scrollable > 0 ? (scrolled/scrollable) * (n-1) : 0;
+
+      // expose the main sequence's raw progress so the WebGL world backdrop's
+      // camera can move in lock-step with this same DOM flip, not a copy of it
+      if(wrapperId === 'rolo-wrapper') window.__mainRoloProgress = progress;
 
       const activeIdxNow = Math.round(Math.max(0, Math.min(n-1, progress)));
       const idleSway = prefersReduced ? 0 : Math.sin(performance.now()/2600) * 1.6;
@@ -1077,8 +1063,20 @@
   }
 </script>
 
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.min.js",
+    "three/addons/": "./vendor/addons/"
+  }
+}
+</script>
+
 <script type="module">
-  import * as THREE from './vendor/three.module.min.js';
+  import * as THREE from 'three';
+  import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+  import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+  import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isSmall = window.innerWidth < 640;
@@ -1093,11 +1091,199 @@
   if(hasWebGL()){
     const COL_ACCENT = 0x0F6B4F;
     const COL_GOLD = 0xF1AE12;
+    const COL_PAPER = 0xFAFAF6;
 
     let docHidden = false;
     document.addEventListener('visibilitychange', ()=>{ docHidden = document.hidden; });
 
-    /* ---------------- Footer: rotating knot + drifting particles (unchanged) ---------------- */
+    let mx = 0, my = 0;
+    window.addEventListener('pointermove', (e)=>{
+      mx = (e.clientX / window.innerWidth) * 2 - 1;
+      my = (e.clientY / window.innerHeight) * 2 - 1;
+    }, {passive:true});
+
+    /* ================= WORLD: the always-present, real-lit WebGL backdrop.
+       A camera drifts between "stations" — one per chapter — each marked by
+       genuine extruded 3D typography of that chapter's actual name (not an
+       abstract shape), lit with real PBR materials and a real glass companion.
+       Camera focus is driven by window.__mainRoloProgress, the exact same
+       progress value driving the DOM rolodex flip, so both layers move in
+       lock-step rather than as two separately-timed animations. ================= */
+    const world = (()=>{
+      const canvas = document.getElementById('world-3d');
+      if(!canvas) return null;
+
+      const renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.08;
+      if(!isSmall){
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      }
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(COL_PAPER);
+      scene.fog = new THREE.Fog(COL_PAPER, 13, 32);
+
+      const camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 100);
+
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.05).texture;
+
+      const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambient);
+      const key = new THREE.DirectionalLight(0xfff6e6, 1.9);
+      key.position.set(5, 7, 6);
+      if(!isSmall){
+        key.castShadow = true;
+        key.shadow.mapSize.set(1024, 1024);
+        key.shadow.camera.near = 1;
+        key.shadow.camera.far = 26;
+        key.shadow.camera.left = -12;
+        key.shadow.camera.right = 12;
+        key.shadow.camera.top = 12;
+        key.shadow.camera.bottom = -12;
+      }
+      scene.add(key);
+      const rimGreen = new THREE.PointLight(COL_ACCENT, 5, 15, 2);
+      const rimGold = new THREE.PointLight(COL_GOLD, 4.5, 15, 2);
+      scene.add(rimGreen, rimGold);
+
+      const floor = new THREE.Mesh(
+        new THREE.PlaneGeometry(220, 60),
+        new THREE.MeshStandardMaterial({color:0xf1efe6, roughness:0.65, metalness:0.04})
+      );
+      floor.rotation.x = -Math.PI/2;
+      floor.position.y = -2.2;
+      floor.receiveShadow = !isSmall;
+      scene.add(floor);
+
+      // one real station per chapter — the actual company/project names, not decoration
+      const stationNames = ['MUSKAN', 'DELTAX', 'KRAFTSHALA', 'FREELANCE', 'L2R PARTNERS', 'ADMINIFY'];
+      const stations = stationNames.map((_, i)=> ({
+        pos: new THREE.Vector3(i*7, 0.2 + (i%2===0 ? 0.2 : -0.1), Math.sin(i*1.3)*1.4)
+      }));
+
+      const nameGroup = new THREE.Group();
+      scene.add(nameGroup);
+      const nameMeshes = [];
+
+      // marketing-motif companion: a small real 3D growth-bar sculpture per
+      // station, echoing the horizontal "Focus areas" bar charts already used
+      // in the DOM chapter cards — metallic green/gold, not an abstract shape
+      const barUnitGeo = new THREE.BoxGeometry(0.26, 1, 0.26);
+      const barBaseGeo = new THREE.BoxGeometry(1, 0.06, 1);
+      const barMatGreen = new THREE.MeshStandardMaterial({color: COL_ACCENT, metalness: 0.55, roughness: 0.35});
+      const barMatGold = new THREE.MeshStandardMaterial({color: COL_GOLD, metalness: 0.8, roughness: 0.28});
+      const barBaseMat = new THREE.MeshStandardMaterial({color: 0xdcd7c8, metalness: 0.25, roughness: 0.55});
+
+      function buildGrowthChart(seed){
+        const g = new THREE.Group();
+        const heights = [0.5, 0.85, 0.65, 1.15, 0.95].map((h, i)=> h * (0.85 + 0.3*Math.abs(Math.sin(seed + i))));
+        const barWidth = 0.26, barGap = 0.13;
+        const totalW = heights.length*barWidth + (heights.length-1)*barGap;
+        heights.forEach((h, i)=>{
+          const mesh = new THREE.Mesh(barUnitGeo, i % 2 === 0 ? barMatGreen : barMatGold);
+          mesh.scale.y = h;
+          mesh.position.set(-totalW/2 + i*(barWidth+barGap) + barWidth/2, h/2, 0);
+          mesh.castShadow = !isSmall;
+          g.add(mesh);
+        });
+        const base = new THREE.Mesh(barBaseGeo, barBaseMat);
+        base.scale.set(totalW + 0.3, 1, 0.56);
+        base.position.y = -0.03;
+        base.receiveShadow = !isSmall;
+        g.add(base);
+        return g;
+      }
+
+      const companions = stations.map((s, i)=>{
+        const chart = buildGrowthChart(i*1.7);
+        chart.position.copy(s.pos).add(new THREE.Vector3(2.0, 0.15, -0.5));
+        chart.rotation.y = -0.35 + i*0.05;
+        scene.add(chart);
+        return {chart};
+      });
+
+      const loader = new FontLoader();
+      loader.load('./vendor/helvetiker_bold.typeface.json', (font)=>{
+        stationNames.forEach((name, i)=>{
+          const geo = new TextGeometry(name, {
+            font, size: 1.0, height: 0.28, curveSegments: 6,
+            bevelEnabled: true, bevelThickness: 0.032, bevelSize: 0.018, bevelSegments: 3,
+          });
+          geo.computeBoundingBox();
+          geo.translate(-(geo.boundingBox.max.x - geo.boundingBox.min.x)/2, 0, 0);
+          const mat = new THREE.MeshStandardMaterial({color: COL_ACCENT, metalness: 0.6, roughness: 0.32});
+          const mesh = new THREE.Mesh(geo, mat);
+          mesh.position.copy(stations[i].pos);
+          mesh.castShadow = !isSmall;
+          mesh.scale.setScalar(0.001);
+          nameGroup.add(mesh);
+          nameMeshes.push(mesh);
+        });
+      });
+
+      function resize(){
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth/window.innerHeight;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      let camStation = 0;
+      const clock = new THREE.Clock();
+      const tmpFocus = new THREE.Vector3();
+
+      function tick(){
+        const t = clock.getElapsedTime();
+        const raw = window.__mainRoloProgress || 0;
+        const targetStation = Math.max(0, Math.min(stationNames.length - 1, raw - 1));
+        camStation += (targetStation - camStation) * (prefersReduced ? 1 : 0.045);
+
+        const idx = Math.floor(camStation);
+        const frac = camStation - idx;
+        const a = stations[idx].pos, b = stations[Math.min(idx+1, stations.length-1)].pos;
+        tmpFocus.lerpVectors(a, b, frac);
+
+        camera.position.set(
+          tmpFocus.x - 3.6 + (prefersReduced ? 0 : mx*0.4),
+          tmpFocus.y + 1.5 + (prefersReduced ? 0 : -my*0.25),
+          tmpFocus.z + 7.2
+        );
+        camera.lookAt(tmpFocus.x + 0.6, tmpFocus.y, tmpFocus.z);
+
+        rimGreen.position.set(tmpFocus.x - 2, tmpFocus.y + 2, tmpFocus.z + 2);
+        rimGold.position.set(tmpFocus.x + 3, tmpFocus.y - 1, tmpFocus.z + 1.5);
+
+        nameMeshes.forEach((m, i)=>{
+          const dist = Math.abs(i - camStation);
+          const s = Math.max(0.001, 1 - Math.min(1, dist*0.35));
+          if(!prefersReduced){
+            m.scale.setScalar(m.scale.x + (s - m.scale.x)*0.08);
+            m.rotation.y = Math.sin(t*0.3 + i)*0.05;
+          } else {
+            m.scale.setScalar(s);
+          }
+        });
+
+        companions.forEach((c, i)=>{
+          if(!prefersReduced){
+            c.chart.rotation.y += 0.0016;
+            c.chart.position.y = stations[i].pos.y + 0.15 + Math.sin(t*0.5 + i)*0.05;
+          }
+        });
+
+        renderer.render(scene, camera);
+      }
+
+      return {tick};
+    })();
+
+    /* ---------------- Footer: real lit metal + drifting particles (was flat wireframe) ---------------- */
     const footerScene = (()=>{
       const canvas = document.getElementById('footer-3d');
       const footerEl = document.querySelector('footer');
@@ -1108,9 +1294,17 @@
       const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
       camera.position.set(0, 0, 10);
 
+      scene.add(new THREE.AmbientLight(0x445544, 0.6));
+      const key = new THREE.DirectionalLight(0xfff2d6, 2.2);
+      key.position.set(4, 5, 6);
+      scene.add(key);
+      const rim = new THREE.PointLight(COL_GOLD, 12, 14, 2);
+      rim.position.set(-3, 1, 3);
+      scene.add(rim);
+
       const knot = new THREE.Mesh(
-        new THREE.TorusKnotGeometry(1.6, 0.4, 140, 16),
-        new THREE.MeshBasicMaterial({color:COL_ACCENT, wireframe:true, transparent:true, opacity:0.35})
+        new THREE.TorusKnotGeometry(1.6, 0.42, 160, 20),
+        new THREE.MeshStandardMaterial({color: COL_GOLD, metalness: 1, roughness: 0.28})
       );
       scene.add(knot);
 
@@ -1123,7 +1317,7 @@
       }
       const geo = new THREE.BufferGeometry();
       geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const points = new THREE.Points(geo, new THREE.PointsMaterial({color:COL_GOLD, size:0.05, transparent:true, opacity:0.6}));
+      const points = new THREE.Points(geo, new THREE.PointsMaterial({color: COL_ACCENT, size: 0.045, transparent: true, opacity: 0.7}));
       scene.add(points);
 
       function resize(){
@@ -1154,15 +1348,14 @@
       return {tick};
     })();
 
-    if(footerScene){
-      if(prefersReduced){
-        footerScene.tick();
-      } else {
-        (function loop(){
-          if(!docHidden) footerScene.tick();
-          requestAnimationFrame(loop);
-        })();
-      }
+    const layers = [world, footerScene].filter(Boolean);
+    if(prefersReduced){
+      layers.forEach(l => l.tick());
+    } else {
+      (function loop(){
+        if(!docHidden) layers.forEach(l => l.tick());
+        requestAnimationFrame(loop);
+      })();
     }
   }
 </script>
