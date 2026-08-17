@@ -30,24 +30,25 @@
   nav .progress-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink); letter-spacing:0.08em; text-transform:uppercase; background:var(--paper); padding:9px 14px; border-radius:20px; border:1.5px solid var(--ink);}
   #progress-bar{position:fixed; top:0; left:0; height:3px; background:var(--accent); width:0%; z-index:300; transition:width .08s linear;}
 
-  header.hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 32px 80px; position:relative; overflow:hidden; isolation:isolate;}
-  .hero-noise{position:absolute; inset:0; z-index:-3; opacity:.35; pointer-events:none;
+  /* ---------- shared hero-style decorations (now used inside the intro placards) ---------- */
+  .hero-noise{position:absolute; inset:0; z-index:0; opacity:.35; pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");}
-  .hero-wordmark{position:absolute; z-index:-2; top:52%; left:50%; transform:translate(-50%,-50%); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:min(30vw,420px); line-height:1; letter-spacing:-0.03em; white-space:nowrap; color:transparent; -webkit-text-stroke:1.5px rgba(21,20,15,0.09); user-select:none; pointer-events:none;}
-  .hero-frame{position:absolute; inset:18px; border:1px solid var(--line); z-index:-1; pointer-events:none;}
-  .hero-frame::before{content:'MUSKAN K. — PORTFOLIO 2026'; position:absolute; top:-1px; right:0; transform:translateY(-100%); font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.1em; color:var(--muted); padding-bottom:8px;}
-  .hero-orb{position:absolute; z-index:-2; width:520px; height:520px; border-radius:50%; background:conic-gradient(from 120deg at 40% 35%, rgba(15,107,79,0.9), rgba(241,174,18,0.35) 30%, rgba(21,20,15,0.05) 55%, rgba(15,107,79,0.55) 80%, rgba(15,107,79,0.9)); opacity:.55; filter:blur(38px); top:-14%; right:-10%; animation:orbFloat 11s ease-in-out infinite;} .hero-orb2{position:absolute; z-index:-2; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle at 60% 40%, rgba(241,174,18,0.4), transparent 70%); opacity:.4; filter:blur(24px); bottom:6%; left:2%; animation:orbFloat 13s ease-in-out infinite reverse;}
-  @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-18px,26px) scale(1.05);}}
-  .hero-crosshair{position:absolute; z-index:-1; width:14px; height:14px; opacity:.5;}
+  .hero-wordmark{position:absolute; z-index:0; top:52%; left:50%; transform:translate(-50%,-50%); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:min(26vw,340px); line-height:1; letter-spacing:-0.03em; white-space:nowrap; color:transparent; -webkit-text-stroke:1.5px rgba(21,20,15,0.09); user-select:none; pointer-events:none;}
+  .hero-frame{position:absolute; inset:14px; border:1px solid var(--line); z-index:0; pointer-events:none;}
+  .hero-frame::before{content:'MUSKAN K. — PORTFOLIO 2026'; position:absolute; top:-1px; right:0; transform:translateY(-100%); font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.1em; color:var(--muted); padding-bottom:6px;}
+  .hero-orb{position:absolute; z-index:0; width:420px; height:420px; border-radius:50%; background:conic-gradient(from 120deg at 40% 35%, rgba(15,107,79,0.9), rgba(241,174,18,0.35) 30%, rgba(21,20,15,0.05) 55%, rgba(15,107,79,0.55) 80%, rgba(15,107,79,0.9)); opacity:.5; filter:blur(34px); top:-16%; right:-8%; animation:orbFloat 11s ease-in-out infinite;}
+  .hero-orb2{position:absolute; z-index:0; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle at 60% 40%, rgba(241,174,18,0.4), transparent 70%); opacity:.4; filter:blur(20px); bottom:4%; left:2%; animation:orbFloat 13s ease-in-out infinite reverse;}
+  @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-14px,20px) scale(1.05);}}
+  .hero-crosshair{position:absolute; z-index:0; width:14px; height:14px; opacity:.5;}
   .hero-crosshair::before,.hero-crosshair::after{content:''; position:absolute; background:var(--ink);}
   .hero-crosshair::before{width:100%; height:1px; top:50%;}
   .hero-crosshair::after{height:100%; width:1px; left:50%;}
-  .hero-crosshair.c1{bottom:120px; left:36px;}
-  .hero-crosshair.c2{top:120px; left:44%;}
-  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:10px;}
+  .hero-crosshair.c1{bottom:64px; left:28px;}
+  .hero-crosshair.c2{top:56px; left:44%;}
+  .eyebrow{position:relative; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:10px;}
   .eyebrow::before{content:''; width:26px; height:2px; background:var(--accent); display:inline-block; animation:eyebrowPulse 2.6s ease-in-out infinite;}
   @keyframes eyebrowPulse{0%,100%{opacity:1; width:26px;} 50%{opacity:.45; width:34px;}}
-  h1.headline{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(38px,6.6vw,84px); line-height:1.0; letter-spacing:-0.02em; max-width:920px;}
+  h1.headline{position:relative; z-index:2; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,5.4vw,64px); line-height:1.02; letter-spacing:-0.02em; max-width:640px;}
   h1.headline .line{overflow:hidden; display:block;}
   h1.headline .line span{display:inline-block; transform:translateY(112%); animation:riseUp .9s cubic-bezier(.22,1,.36,1) forwards;}
   h1.headline .line:nth-child(1) span{animation-delay:.05s;}
@@ -55,19 +56,16 @@
   h1.headline .line:nth-child(3) span{animation-delay:.31s;}
   @keyframes riseUp{to{transform:translateY(0);}}
   h1.headline em{font-style:italic; color:var(--accent);}
-  .hero-sub{margin-top:28px; max-width:520px; font-size:17px; line-height:1.6; color:var(--muted); opacity:0; animation:fadeUp .9s cubic-bezier(.22,1,.36,1) forwards; animation-delay:.55s;}
+  .hero-sub{position:relative; z-index:2; margin-top:20px; max-width:440px; font-size:15.5px; line-height:1.6; color:var(--muted); opacity:0; animation:fadeUp .9s cubic-bezier(.22,1,.36,1) forwards; animation-delay:.55s;}
   @keyframes fadeUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
-  .hero-meta{margin-top:40px; display:flex; gap:12px; flex-wrap:wrap; opacity:0; animation:fadeUp .9s cubic-bezier(.22,1,.36,1) forwards; animation-delay:.72s;}
-  .chip{font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:8px 14px; border-radius:20px; border:1.5px solid var(--ink); display:inline-block; animation:idleFloat 4.6s ease-in-out infinite;}
+  .hero-meta{position:relative; z-index:2; margin-top:26px; display:flex; gap:10px; flex-wrap:wrap; opacity:0; animation:fadeUp .9s cubic-bezier(.22,1,.36,1) forwards; animation-delay:.72s;}
+  .chip{font-family:'IBM Plex Mono',monospace; font-size:11px; padding:7px 13px; border-radius:20px; border:1.5px solid var(--ink); display:inline-block; animation:idleFloat 4.6s ease-in-out infinite;}
   .chip:nth-child(2){animation-delay:.35s;}
   .chip:nth-child(3){animation-delay:.7s;}
   .chip.fill{background:var(--ink); color:var(--paper);}
   @keyframes idleFloat{0%,100%{transform:translateY(0) rotateZ(0deg);} 50%{transform:translateY(-7px) rotateZ(.6deg);}}
-  .scroll-cue{position:absolute; bottom:36px; left:32px; display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.08em;}
-  .scroll-cue .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulseDot 1.6s ease-in-out infinite;}
-  @keyframes pulseDot{0%,100%{opacity:.3; transform:scale(.85);} 50%{opacity:1; transform:scale(1.15);}}
 
-  .marquee-band{border-top:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); padding:15px 0; overflow:hidden; white-space:nowrap; perspective:600px;}
+  .marquee-band{margin-top:78px; border-top:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); padding:15px 0; overflow:hidden; white-space:nowrap; perspective:600px;}
   .marquee-track{display:inline-block; animation:scrollLeft 32s linear infinite; transform-origin:center;}
   .marquee-track span{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); margin-right:14px; text-transform:uppercase; letter-spacing:.05em;}
   .marquee-track span.sep{color:var(--accent); margin-right:14px;}
@@ -77,7 +75,8 @@
   .section-head h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,44px); letter-spacing:-0.01em;}
   .section-head p{margin-top:14px; color:var(--muted); font-size:15.5px; line-height:1.6; max-width:520px;}
 
-  .rolodex-wrapper{position:relative; height:700vh;}
+  .rolodex-wrapper{position:relative; height:1080vh;}
+  .rolodex-wrapper.proof-wrapper{height:1260vh;}
   .rolodex-sticky{position:sticky; top:0; height:100vh; overflow:hidden; perspective:1500px; display:flex; align-items:center; justify-content:center;}
   .rolodex-sticky::before, .rolodex-sticky::after{content:''; position:absolute; left:0; right:0; height:90px; z-index:5; pointer-events:none;}
   .rolodex-sticky::before{top:0; background:linear-gradient(var(--paper), transparent);}
@@ -100,6 +99,13 @@
   }
   @media(max-width:720px){ .placard{grid-template-columns:1fr; height:min(660px,80vh);} }
 
+  /* ---------- intro cards (title + headline) share the rolodex mechanic, single column ---------- */
+  .placard.title-card, .placard.headline-card{grid-template-columns:1fr; width:min(1040px,92vw); height:min(640px,78vh);}
+  .intro-inner{position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:center; padding:56px 64px;}
+  @media(max-width:720px){ .intro-inner{padding:40px 30px;} }
+  .title-headline{position:relative; z-index:2; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(44px,9vw,116px); line-height:1.0; letter-spacing:-0.02em;}
+  .title-headline em{font-style:italic; color:var(--accent);}
+
   .placard-text{padding:32px 30px; display:flex; flex-direction:column; position:relative; z-index:2;}
   .placard-index{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); margin-bottom:10px; letter-spacing:.08em;}
   .placard-brand{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(22px,2.8vw,30px); letter-spacing:-0.01em;
@@ -113,6 +119,8 @@
   .placard-text ul{list-style:none; font-size:12.5px; line-height:1.5; overflow-y:auto;}
   .placard-text ul li{position:relative; padding-left:15px; margin-bottom:7px;}
   .placard-text ul li::before{content:'—'; position:absolute; left:0; color:var(--accent);}
+  .placard-link{display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:9px 14px; border-radius:20px; border:1.5px solid var(--ink); font-family:'IBM Plex Mono',monospace; font-size:11px; text-decoration:none; color:var(--ink); letter-spacing:.04em; transition:all .25s; align-self:flex-start;}
+  .placard-link:hover{background:var(--ink); color:var(--paper);}
   .placard-stat-row{display:flex; gap:16px; margin-top:auto; padding-top:12px; border-top:1px dashed var(--line); flex-wrap:wrap;}
   .placard-stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700;}
   .placard-stat span{font-family:'IBM Plex Mono',monospace; font-size:8.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted);}
@@ -148,37 +156,21 @@
   @keyframes dotPulse{0%,100%{box-shadow:0 0 0 0 rgba(15,107,79,.45);} 50%{box-shadow:0 0 0 7px rgba(15,107,79,0);}}
   .rolo-hint{position:absolute; top:24px; left:0; right:0; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); z-index:10;}
 
-  .proof-grid{max-width:1000px; margin:56px auto 0; padding:0 32px; display:grid; grid-template-columns:1fr; gap:14px;}
-  @media(min-width:720px){.proof-grid{grid-template-columns:1fr 1fr;}}
-  .proof-item{border:1.5px solid var(--ink); border-radius:14px; padding:22px 22px; display:flex; flex-direction:column; gap:6px; text-decoration:none; transition:transform .25s, background .25s; animation:idleFloat 5.8s ease-in-out infinite;}
-  .proof-grid .proof-item:nth-child(2n){animation-delay:.5s;}
-  .proof-grid .proof-item:nth-child(3n){animation-delay:1s;}
-  .proof-grid .proof-item:nth-child(4n){animation-delay:1.5s;}
-  .proof-item:hover{background:var(--ink); color:var(--paper); transform:translateY(-3px); animation-play-state:paused;}
-  .proof-item:hover .proof-kicker{color:var(--accent);}
-  .proof-kicker{font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);}
-  .proof-title{font-family:'Space Grotesk',sans-serif; font-size:16.5px; font-weight:600; line-height:1.3;}
-  .proof-source{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:2px;}
-  .proof-item:hover .proof-source{color:rgba(250,250,246,.65);}
-  .proof-arrow{margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:11px;}
-
   .section{padding:100px 32px;}
-  .split{max-width:1000px; margin:56px auto 0; display:grid; grid-template-columns:1fr; gap:20px;}
+  .split{max-width:1000px; margin:56px auto 0; display:grid; grid-template-columns:1fr; gap:20px; perspective:1400px;}
   @media(min-width:760px){.split{grid-template-columns:1fr 1fr;}}
-  .card{border:1.5px solid var(--ink); border-radius:14px; padding:28px; background:var(--paper); animation:idleFloat 6.4s ease-in-out infinite;}
+  .card{border:1.5px solid var(--ink); border-radius:14px; padding:28px; background:var(--paper); animation:idleFloat 6.4s ease-in-out infinite; transform-style:preserve-3d; transition:transform .25s ease, background .25s ease;}
   .split .card:nth-child(2){animation-delay:.55s;}
   .card .tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px; display:inline-block;}
   .card h3{font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; margin-bottom:8px;}
   .card p{font-size:14px; line-height:1.6; color:var(--muted); margin-bottom:8px;}
-  .press-quote{font-family:'Space Grotesk',sans-serif; font-size:16.5px; line-height:1.45; margin:12px 0; font-weight:500;}
-  .press-link{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--accent); text-decoration:none; border-bottom:1.5px solid var(--accent);}
   .cert-badge{display:flex; align-items:center; gap:12px; margin-top:14px; padding:12px 14px; border:1.5px solid var(--accent); border-radius:10px; background:rgba(15,107,79,0.06);}
   .cert-badge .cert-icon{width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--paper); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; flex-shrink:0; animation:iconSway 3.4s ease-in-out infinite;}
   @keyframes iconSway{0%,100%{transform:rotate(-6deg);} 50%{transform:rotate(6deg);}}
   .cert-badge .cert-text{font-family:'IBM Plex Mono',monospace; font-size:11px; line-height:1.5; letter-spacing:.02em;}
   .cert-badge .cert-text b{display:block; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; letter-spacing:0; margin-bottom:1px;}
 
-  footer{padding:130px 32px 70px; text-align:center; position:relative; background:var(--ink); color:var(--paper); margin-top:40px;}
+  footer{padding:130px 32px 70px; text-align:center; position:relative; background:var(--ink); color:var(--paper); margin-top:40px; overflow:hidden;}
   footer h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,6vw,62px); letter-spacing:-0.02em; max-width:740px; margin:0 auto 32px;}
   footer h2 em{color:var(--accent); font-style:italic;}
   .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; perspective:600px;}
@@ -187,10 +179,7 @@
   .cta-btn:hover{transform:translateY(-5px) rotateX(6deg); animation-play-state:paused;}
   footer .foot-note{margin-top:70px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(250,250,246,.4); letter-spacing:.05em;}
 
-  /* ---------- 3D canvas layers ---------- */
-  #bg-3d{position:fixed; inset:0; z-index:-60; width:100%; height:100%; pointer-events:none;}
-  #hero-3d{position:absolute; inset:0; z-index:-2; width:100%; height:100%; pointer-events:none;}
-  footer{overflow:hidden;}
+  /* ---------- footer 3D layer (kept as-is) ---------- */
   #footer-3d{position:absolute; inset:0; z-index:0; width:100%; height:100%; pointer-events:none;}
   footer > *{position:relative; z-index:1;}
   footer > #footer-3d{z-index:0;}
@@ -204,19 +193,14 @@
   .reveal{opacity:0; transform:perspective(1200px) rotateX(-14deg) translateY(36px) translateZ(-60px); transform-origin:50% 100%; transition:opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);}
   .reveal.in{opacity:1; transform:perspective(1200px) rotateX(0deg) translateY(0) translateZ(0);}
 
-  /* ---------- tilt-enabled + idle-floating cards ---------- */
-  .card, .proof-item{transform-style:preserve-3d; transition:transform .25s ease, background .25s ease;}
-  .proof-grid, .split{perspective:1400px;}
-
   @media (prefers-reduced-motion: reduce){
     #cursor-glow{display:none;}
-    .chip, .cta-btn, .proof-item, .card, .cert-badge .cert-icon, .rolo-dot.active, .eyebrow::before{animation:none !important;}
+    .chip, .cta-btn, .card, .cert-badge .cert-icon, .rolo-dot.active, .eyebrow::before{animation:none !important;}
   }
 </style>
 </head>
 <body>
 
-<canvas id="bg-3d" aria-hidden="true"></canvas>
 <div id="cursor-glow" aria-hidden="true"></div>
 
 <div id="progress-bar"></div>
@@ -224,30 +208,6 @@
   <span class="mark">MUSKAN <b>K.</b></span>
   <span class="progress-label" id="nav-progress">SCROLL 00%</span>
 </nav>
-
-<header class="hero">
-  <div class="hero-noise"></div>
-  <div class="hero-wordmark">MUSKAN</div>
-  <div class="hero-orb"></div>
-  <div class="hero-orb2"></div>
-  <canvas id="hero-3d" aria-hidden="true"></canvas>
-  <div class="hero-frame"></div>
-  <div class="hero-crosshair c1"></div>
-  <div class="hero-crosshair c2"></div>
-  <div class="eyebrow">Growth &amp; Marketing Communications</div>
-  <h1 class="headline">
-    <span class="line"><span>Four chapters of</span></span>
-    <span class="line"><span>turning attention into <em>growth</em>,</span></span>
-    <span class="line"><span>across three countries.</span></span>
-  </h1>
-  <p class="hero-sub">From performance-driven B2B growth in India to multi-brand marketing leadership in Paris — flip through the chapters below.</p>
-  <div class="hero-meta">
-    <span class="chip fill">MBA Candidate, EMLV Paris</span>
-    <span class="chip">Based in Paris</span>
-    <span class="chip">DeltaX → Kraftshala → Freelance → L2R</span>
-  </div>
-  <div class="scroll-cue"><span class="dot"></span> SCROLL TO FLIP THROUGH THE CHAPTERS</div>
-</header>
 
 <div class="marquee-band">
   <div class="marquee-track" id="marquee">
@@ -258,17 +218,44 @@
   </div>
 </div>
 
-<div class="section-head">
-  <div class="eyebrow">The Journey</div>
-  <h2>Flip through the chapters.</h2>
-  <p>Four roles, four chapters — keep scrolling and each one rotates into place.</p>
-</div>
-
 <div class="rolodex-wrapper" id="rolo-wrapper">
   <div class="rolodex-sticky">
-    <div class="rolo-hint">Scroll to advance</div>
+    <div class="rolo-hint">Scroll to begin</div>
 
-    <div class="placard" data-i="0">
+    <div class="placard title-card" data-i="0">
+      <div class="intro-inner title-inner">
+        <div class="hero-noise"></div>
+        <div class="hero-orb2"></div>
+        <div class="eyebrow">Portfolio — 2026</div>
+        <h1 class="title-headline">Muskan <em>Portfolio</em></h1>
+      </div>
+    </div>
+
+    <div class="placard headline-card" data-i="1">
+      <div class="intro-inner">
+        <div class="hero-noise"></div>
+        <div class="hero-wordmark">MUSKAN</div>
+        <div class="hero-orb"></div>
+        <div class="hero-orb2"></div>
+        <div class="hero-frame"></div>
+        <div class="hero-crosshair c1"></div>
+        <div class="hero-crosshair c2"></div>
+        <div class="eyebrow">Growth &amp; Marketing Communications</div>
+        <h1 class="headline">
+          <span class="line"><span>Four chapters of</span></span>
+          <span class="line"><span>turning attention into <em>growth</em>,</span></span>
+          <span class="line"><span>across three countries.</span></span>
+        </h1>
+        <p class="hero-sub">From performance-driven B2B growth in India to multi-brand marketing leadership in Paris — flip through the chapters below.</p>
+        <div class="hero-meta">
+          <span class="chip fill">MBA Candidate, EMLV Paris</span>
+          <span class="chip">Based in Paris</span>
+          <span class="chip">DeltaX → Kraftshala → Freelance → L2R</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="2">
       <div class="placard-text">
         <div class="placard-index">01 / 05</div>
         <div class="placard-brand">DeltaX</div>
@@ -315,7 +302,7 @@
       </div>
     </div>
 
-    <div class="placard" data-i="1">
+    <div class="placard" data-i="3">
       <div class="placard-text">
         <div class="placard-index">02 / 05</div>
         <div class="placard-brand">Kraftshala</div>
@@ -358,7 +345,7 @@
       </div>
     </div>
 
-    <div class="placard" data-i="2">
+    <div class="placard" data-i="4">
       <div class="placard-text">
         <div class="placard-index">03 / 05</div>
         <div class="placard-brand">Freelance</div>
@@ -400,7 +387,7 @@
       </div>
     </div>
 
-    <div class="placard" data-i="3">
+    <div class="placard" data-i="5">
       <div class="placard-text">
         <div class="placard-index">04 / 05</div>
         <div class="placard-brand">L2R Partners</div>
@@ -441,7 +428,7 @@
       </div>
     </div>
 
-    <div class="placard" data-i="4">
+    <div class="placard" data-i="6">
       <div class="placard-text">
         <div class="placard-index">05 / 05</div>
         <div class="placard-brand">Adminify Office</div>
@@ -490,72 +477,268 @@
 
 <main>
 
-<section class="section" style="padding-bottom:20px;">
+<section class="section" style="padding-bottom:0;">
   <div class="section-head reveal" style="padding-top:0; margin-bottom:0;">
     <div class="eyebrow">Social Proof</div>
     <h2>Proof, in public.</h2>
-    <p>Where this work has been written about, awarded, or is live for anyone to see.</p>
-  </div>
-  <div class="proof-grid">
-
-    <a class="proof-item reveal" href="https://www.afaqs.com/news/advertising/winners-of-youtube-works-awards-india-2021-announced" target="_blank">
-      <span class="proof-kicker">Award coverage — DeltaX</span>
-      <span class="proof-title">Winners of YouTube Works Awards India 2021</span>
-      <span class="proof-source">afaqs.com</span>
-      <span class="proof-arrow">Read the coverage ↗</span>
-    </a>
-
-    <a class="proof-item reveal" href="https://www.ogilvyasia.com/news-bites/ogilvy-and-wavemaker-india-win-the-grand-prix-for-cadbury-celebrations-not-just-a-cadbury-ad/" target="_blank">
-      <span class="proof-kicker">Award coverage — DeltaX</span>
-      <span class="proof-title">Ogilvy &amp; Wavemaker India win the Grand Prix for "Not Just A Cadbury Ad"</span>
-      <span class="proof-source">ogilvyasia.com</span>
-      <span class="proof-arrow">Read the coverage ↗</span>
-    </a>
-
-    <a class="proof-item reveal" href="https://www.bweducation.com/article/kraftshala-marketing-launchpad-program-400073" target="_blank">
-      <span class="proof-kicker">Program press — Kraftshala</span>
-      <span class="proof-title">Kraftshala Marketing Launchpad Program</span>
-      <span class="proof-source">bweducation.com</span>
-      <span class="proof-arrow">Read the coverage ↗</span>
-    </a>
-
-    <a class="proof-item reveal" href="https://www.mediainfoline.com/education/kraftshala-launches-a-specialised-pg-program-for-sales-marketing-and-business-leadership" target="_blank">
-      <span class="proof-kicker">Program press — Kraftshala</span>
-      <span class="proof-title">Kraftshala launches PG Program for Sales, Marketing &amp; Business Leadership</span>
-      <span class="proof-source">mediainfoline.com</span>
-      <span class="proof-arrow">Read the coverage ↗</span>
-    </a>
-
-    <a class="proof-item reveal" href="https://www.linkedin.com/in/muskan-k-3176b6194/" target="_blank">
-      <span class="proof-kicker">Personal brand — Freelance</span>
-      <span class="proof-title">LinkedIn profile — 6K+ followers, 1M+ impressions</span>
-      <span class="proof-source">linkedin.com</span>
-      <span class="proof-arrow">View profile ↗</span>
-    </a>
-
-    <a class="proof-item reveal" href="https://www.les-financiers.fr" target="_blank">
-      <span class="proof-kicker">Built &amp; managed — L2R Partners</span>
-      <span class="proof-title">Les Financiers — recruitment consultancy website</span>
-      <span class="proof-source">les-financiers.fr</span>
-      <span class="proof-arrow">Visit the live site ↗</span>
-    </a>
-
-    <a class="proof-item reveal" href="https://www.adminify-office.com" target="_blank">
-      <span class="proof-kicker">Built &amp; managed — L2R Partners</span>
-      <span class="proof-title">Adminify Office — Back Office as a Service platform</span>
-      <span class="proof-source">adminify-office.com</span>
-      <span class="proof-arrow">Visit the live site ↗</span>
-    </a>
-
-    <a class="proof-item reveal" href="https://www.emlv.fr/en/studying-in-the-heart-of-europes-business-hub-muskans-mba-journey-at-emlv/" target="_blank">
-      <span class="proof-kicker">Featured press — EMLV</span>
-      <span class="proof-title">Studying in the Heart of Europe's Business Hub: Muskan's MBA Journey at EMLV</span>
-      <span class="proof-source">emlv.fr</span>
-      <span class="proof-arrow">Read the feature ↗</span>
-    </a>
-
+    <p>Where this work has been written about, awarded, or is live for anyone to see — flip through it the same way as the chapters above.</p>
   </div>
 </section>
+
+<div class="rolodex-wrapper proof-wrapper" id="proof-wrapper">
+  <div class="rolodex-sticky">
+    <div class="rolo-hint">Scroll to advance</div>
+
+    <div class="placard" data-i="0">
+      <div class="placard-text">
+        <div class="placard-index">01 / 08</div>
+        <div class="placard-brand">Winners of YouTube Works Awards India 2021</div>
+        <div class="placard-dates">AWARD COVERAGE — DELTAX</div>
+        <div class="placard-role">afaqs.com — industry award coverage</div>
+        <a class="placard-link" href="https://www.afaqs.com/news/advertising/winners-of-youtube-works-awards-india-2021-announced" target="_blank">Read the coverage ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Ruby + Grand Prix</b><span>YouTube Works Awards India '21</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Ruby + Grand Prix</div>
+            <div class="info-sub">YouTube Works Awards India '21</div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Campaign</div>
+            <div class="info-cards">
+              <div class="info-card"><b>DeltaX &times; Amazon Marketing Services</b><span>ABM &amp; demand-gen campaign, awarded coverage</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">afaqs.com — advertising news</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="1">
+      <div class="placard-text">
+        <div class="placard-index">02 / 08</div>
+        <div class="placard-brand">Ogilvy &amp; Wavemaker India win the Grand Prix for "Not Just A Cadbury Ad"</div>
+        <div class="placard-dates">AWARD COVERAGE — DELTAX</div>
+        <div class="placard-role">ogilvyasia.com — campaign award news</div>
+        <a class="placard-link" href="https://www.ogilvyasia.com/news-bites/ogilvy-and-wavemaker-india-win-the-grand-prix-for-cadbury-celebrations-not-just-a-cadbury-ad/" target="_blank">Read the coverage ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Grand Prix</b><span>Cadbury Celebrations campaign</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Grand Prix</div>
+            <div class="info-sub">Cadbury Celebrations — "Not Just A Cadbury Ad"</div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Coverage</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Ogilvy &amp; Wavemaker India</b><span>Campaign DeltaX supported</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">ogilvyasia.com</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="2">
+      <div class="placard-text">
+        <div class="placard-index">03 / 08</div>
+        <div class="placard-brand">Kraftshala Marketing Launchpad Program</div>
+        <div class="placard-dates">PROGRAM PRESS — KRAFTSHALA</div>
+        <div class="placard-role">bweducation.com — education press coverage</div>
+        <a class="placard-link" href="https://www.bweducation.com/article/kraftshala-marketing-launchpad-program-400073" target="_blank">Read the coverage ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Flagship Program</b><span>Marketing Launchpad</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Marketing Launchpad</div>
+            <div class="info-sub">Flagship GTM program — press coverage</div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Program</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Kraftshala</b><span>Co-executed launch, end-to-end funnel ownership</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">bweducation.com</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="3">
+      <div class="placard-text">
+        <div class="placard-index">04 / 08</div>
+        <div class="placard-brand">Kraftshala launches PG Program for Sales, Marketing &amp; Business Leadership</div>
+        <div class="placard-dates">PROGRAM PRESS — KRAFTSHALA</div>
+        <div class="placard-role">mediainfoline.com — education press coverage</div>
+        <a class="placard-link" href="https://www.mediainfoline.com/education/kraftshala-launches-a-specialised-pg-program-for-sales-marketing-and-business-leadership" target="_blank">Read the coverage ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>New Launch</b><span>Sales &amp; Business Leadership PG</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Sales &amp; Business Leadership</div>
+            <div class="info-sub">New PG program — launch coverage</div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Program</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Kraftshala</b><span>Co-executed launch, cross-functional execution</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">mediainfoline.com</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="4">
+      <div class="placard-text">
+        <div class="placard-index">05 / 08</div>
+        <div class="placard-brand">LinkedIn profile — 6K+ followers, 1M+ impressions</div>
+        <div class="placard-dates">PERSONAL BRAND — FREELANCE</div>
+        <div class="placard-role">linkedin.com — personal profile</div>
+        <a class="placard-link" href="https://www.linkedin.com/in/muskan-k-3176b6194/" target="_blank">View profile ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>6K+</b><span>LinkedIn followers</span></div>
+          <div class="placard-stat"><b>1M+</b><span>Impressions</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Executive Branding</div>
+            <div class="info-sub">Personal profile &amp; positioning strategy</div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-row">
+            <div class="info-stat"><b>6K+</b><span>LINKEDIN FOLLOWERS</span></div>
+            <div class="info-stat"><b>1M+</b><span>IMPRESSIONS</span></div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">linkedin.com/in/muskan-k</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="5">
+      <div class="placard-text">
+        <div class="placard-index">06 / 08</div>
+        <div class="placard-brand">Les Financiers — recruitment consultancy website</div>
+        <div class="placard-dates">BUILT &amp; MANAGED — L2R PARTNERS</div>
+        <div class="placard-role">les-financiers.fr — live site</div>
+        <a class="placard-link" href="https://www.les-financiers.fr" target="_blank">Visit the live site ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Live Site</b><span>Built &amp; maintained solo</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Les Financiers</div>
+            <div class="info-sub">Recruitment consultancy — live site</div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Ownership</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Built &amp; Maintained Solo</b><span>Design, content &amp; ongoing updates</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">les-financiers.fr</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="6">
+      <div class="placard-text">
+        <div class="placard-index">07 / 08</div>
+        <div class="placard-brand">Adminify Office — Back Office as a Service platform</div>
+        <div class="placard-dates">BUILT &amp; MANAGED — L2R PARTNERS</div>
+        <div class="placard-role">adminify-office.com — live site</div>
+        <a class="placard-link" href="https://www.adminify-office.com" target="_blank">Visit the live site ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Live Site</b><span>Design to deploy, solo</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Adminify Office</div>
+            <div class="info-sub">Back Office as a Service — live site</div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Ownership</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Designed, Built &amp; Deployed</b><span>Homepage, services, pricing, FTP publishing</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">adminify-office.com</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="7">
+      <div class="placard-text">
+        <div class="placard-index">08 / 08</div>
+        <div class="placard-brand">Studying in the Heart of Europe's Business Hub: Muskan's MBA Journey at EMLV</div>
+        <div class="placard-dates">FEATURED PRESS — EMLV</div>
+        <div class="placard-role">emlv.fr — featured story</div>
+        <a class="placard-link" href="https://www.emlv.fr/en/studying-in-the-heart-of-europes-business-hub-muskans-mba-journey-at-emlv/" target="_blank">Read the feature ↗</a>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Featured Story</b><span>MBA Journey at EMLV</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Featured Story</div>
+            <div class="info-sub">Muskan's MBA Journey at EMLV</div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">School</div>
+            <div class="info-cards">
+              <div class="info-card"><b>EMLV Business School</b><span>Paris — De Vinci Higher Education</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">emlv.fr</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="rolo-nav" id="proof-nav"></div>
+  </div>
+</div>
 
 <section class="section">
   <div class="section-head reveal" style="padding-top:0; margin-bottom:0;">
@@ -602,8 +785,6 @@
 
   const progressBar = document.getElementById('progress-bar');
   const navProgress = document.getElementById('nav-progress');
-  const heroWordmark = document.querySelector('.hero-wordmark');
-  const heroFrame = document.querySelector('.hero-frame');
 
   function onScroll(){
     const scrollTop = window.scrollY;
@@ -612,88 +793,99 @@
     progressBar.style.width = pct + '%';
     navProgress.textContent = 'SCROLL ' + String(Math.round(pct)).padStart(2,'0') + '%';
     window.__scrollFrac = pct/100;
-
-    if(!prefersReduced){
-      if(heroWordmark) heroWordmark.style.transform = `translate(-50%,-50%) translateY(${scrollTop*0.18}px) scale(${1 + scrollTop*0.0003})`;
-      if(heroFrame) heroFrame.style.transform = `translateY(${scrollTop*-0.06}px)`;
-    }
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
-  const wrapper = document.getElementById('rolo-wrapper');
-  const placards = Array.from(document.querySelectorAll('.placard'));
-  const navEl = document.getElementById('rolo-nav');
-  const n = placards.length;
+  /* ---------- reusable "spin" rolodex mechanic, used for both the intro+chapters
+     sequence and the proof-in-public sequence ---------- */
+  function setupRolodex(wrapperId, navId){
+    const wrapper = document.getElementById(wrapperId);
+    const navEl = document.getElementById(navId);
+    if(!wrapper || !navEl) return null;
+    const placards = Array.from(wrapper.querySelectorAll('.placard'));
+    const n = placards.length;
+    if(n === 0) return null;
 
-  placards.forEach((_,i)=>{
-    const dot = document.createElement('div');
-    dot.className = 'rolo-dot' + (i===0 ? ' active':'');
-    dot.addEventListener('click', ()=>{
+    placards.forEach((_,i)=>{
+      const dot = document.createElement('div');
+      dot.className = 'rolo-dot' + (i===0 ? ' active':'');
+      dot.addEventListener('click', ()=>{
+        const rect = wrapper.getBoundingClientRect();
+        const wrapperTop = rect.top + window.scrollY;
+        const scrollable = wrapper.offsetHeight - window.innerHeight;
+        window.scrollTo({top: wrapperTop + (i/(n-1))*scrollable, behavior:'smooth'});
+      });
+      navEl.appendChild(dot);
+    });
+    const dots = Array.from(navEl.children);
+
+    function update(){
       const rect = wrapper.getBoundingClientRect();
-      const wrapperTop = rect.top + window.scrollY;
       const scrollable = wrapper.offsetHeight - window.innerHeight;
-      window.scrollTo({top: wrapperTop + (i/(n-1))*scrollable, behavior:'smooth'});
-    });
-    navEl.appendChild(dot);
-  });
-  const dots = Array.from(navEl.children);
+      let scrolled = -rect.top;
+      scrolled = Math.min(scrollable, Math.max(0, scrolled));
+      const progress = scrollable > 0 ? (scrolled/scrollable) * (n-1) : 0;
 
-  function updateRolodex(){
-    const rect = wrapper.getBoundingClientRect();
-    const scrollable = wrapper.offsetHeight - window.innerHeight;
-    let scrolled = -rect.top;
-    scrolled = Math.min(scrollable, Math.max(0, scrolled));
-    const progress = scrollable > 0 ? (scrolled/scrollable) * (n-1) : 0;
+      const activeIdxNow = Math.round(Math.max(0, Math.min(n-1, progress)));
+      const idleSway = prefersReduced ? 0 : Math.sin(performance.now()/2600) * 1.6;
 
-    const activeIdxNow = Math.round(Math.max(0, Math.min(n-1, progress)));
-    const idleSway = prefersReduced ? 0 : Math.sin(performance.now()/2600) * 1.6;
+      placards.forEach((card, i)=>{
+        const diff = i - progress;
+        const absDiff = Math.min(Math.abs(diff), 2.2);
+        const offsetPx = diff * 400;
+        const rotateY = diff * -30;
+        const translateZ = -absDiff * 150 + (i === activeIdxNow && !prefersReduced ? Math.sin(performance.now()/1900)*10 : 0);
+        const scale = 1 - absDiff * 0.16;
+        const opacity = Math.max(0, 1 - absDiff/1.7);
+        let tilt = '';
+        if(i === activeIdxNow && !prefersReduced){
+          const mouseTiltX = hoverCapable ? -window.__my*7 : 0;
+          const mouseTiltY = hoverCapable ? window.__mx*7 : 0;
+          tilt = ` rotateX(${(mouseTiltX + idleSway*0.5).toFixed(2)}deg) rotateY(${(mouseTiltY + idleSway).toFixed(2)}deg)`;
+        }
+        card.style.transform = `translate(-50%,-50%) translateX(${offsetPx}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})${tilt}`;
+        card.style.opacity = opacity.toFixed(2);
+        card.style.zIndex = 100 - Math.round(absDiff*10);
+        card.style.pointerEvents = absDiff < 0.5 ? 'auto' : 'none';
+      });
 
-    placards.forEach((card, i)=>{
-      const diff = i - progress;
-      const absDiff = Math.min(Math.abs(diff), 2.2);
-      const offsetPx = diff * 400;
-      const rotateY = diff * -30;
-      const translateZ = -absDiff * 150 + (i === activeIdxNow && !prefersReduced ? Math.sin(performance.now()/1900)*10 : 0);
-      const scale = 1 - absDiff * 0.16;
-      const opacity = Math.max(0, 1 - absDiff/1.7);
-      let tilt = '';
-      if(i === activeIdxNow && !prefersReduced){
-        const mouseTiltX = hoverCapable ? -window.__my*7 : 0;
-        const mouseTiltY = hoverCapable ? window.__mx*7 : 0;
-        tilt = ` rotateX(${(mouseTiltX + idleSway*0.5).toFixed(2)}deg) rotateY(${(mouseTiltY + idleSway).toFixed(2)}deg)`;
-      }
-      card.style.transform = `translate(-50%,-50%) translateX(${offsetPx}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})${tilt}`;
-      card.style.opacity = opacity.toFixed(2);
-      card.style.zIndex = 100 - Math.round(absDiff*10);
-      card.style.pointerEvents = absDiff < 0.5 ? 'auto' : 'none';
-    });
+      dots.forEach((d,i)=> d.classList.toggle('active', i===activeIdxNow));
+    }
 
-    dots.forEach((d,i)=> d.classList.toggle('active', i===activeIdxNow));
+    return { update };
   }
+
+  const rolodexes = [
+    setupRolodex('rolo-wrapper', 'rolo-nav'),
+    setupRolodex('proof-wrapper', 'proof-nav')
+  ].filter(Boolean);
+
+  function updateAllRolodexes(){ rolodexes.forEach(r => r.update()); }
 
   if(!prefersReduced){
     (function idleRolodexLoop(){
-      updateRolodex();
+      updateAllRolodexes();
       requestAnimationFrame(idleRolodexLoop);
     })();
+  } else {
+    updateAllRolodexes();
   }
 
   let ticking = false;
   function requestTick(){
     if(!ticking){
-      requestAnimationFrame(()=>{ updateRolodex(); ticking=false; });
+      requestAnimationFrame(()=>{ updateAllRolodexes(); ticking=false; });
       ticking = true;
     }
   }
   window.addEventListener('scroll', requestTick, {passive:true});
-  window.addEventListener('resize', updateRolodex);
-  updateRolodex();
+  window.addEventListener('resize', updateAllRolodexes);
 
   const marquee = document.getElementById('marquee');
   marquee.innerHTML += marquee.innerHTML;
 
-  /* ---------- cursor glow + rolodex tilt tracking ---------- */
+  /* ---------- cursor glow + rolodex mouse-tilt tracking ---------- */
   if(hoverCapable && !prefersReduced){
     const glow = document.getElementById('cursor-glow');
     window.addEventListener('pointermove', (e)=>{
@@ -711,9 +903,9 @@
     });
   }
 
-  /* ---------- 3D tilt on hover for cards ---------- */
+  /* ---------- 3D tilt on hover for education cards ---------- */
   if(hoverCapable && !prefersReduced){
-    document.querySelectorAll('.card, .proof-item').forEach(el=>{
+    document.querySelectorAll('.card').forEach(el=>{
       el.addEventListener('pointermove', (e)=>{
         const r = el.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;
@@ -758,161 +950,11 @@
   if(hasWebGL()){
     const COL_ACCENT = 0x0F6B4F;
     const COL_GOLD = 0xF1AE12;
-    const COL_INK = 0x15140F;
-
-    let mx = 0, my = 0;
-    window.addEventListener('pointermove', (e)=>{
-      mx = (e.clientX / window.innerWidth) * 2 - 1;
-      my = (e.clientY / window.innerHeight) * 2 - 1;
-    }, {passive:true});
 
     let docHidden = false;
     document.addEventListener('visibilitychange', ()=>{ docHidden = document.hidden; });
 
-    /* ---------------- Ambient site-wide field: particles + drifting wireframe shapes ---------------- */
-    const bg = (()=>{
-      const canvas = document.getElementById('bg-3d');
-      if(!canvas) return null;
-      const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:false});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 2000);
-      camera.position.z = 480;
-
-      const count = isSmall ? 60 : 150;
-      const positions = new Float32Array(count*3);
-      const colors = new Float32Array(count*3);
-      const palette = [new THREE.Color(COL_ACCENT), new THREE.Color(COL_GOLD), new THREE.Color(COL_INK)];
-      for(let i=0;i<count;i++){
-        positions[i*3]   = (Math.random()-0.5) * 1700;
-        positions[i*3+1] = (Math.random()-0.5) * 2600;
-        positions[i*3+2] = (Math.random()-0.5) * 900;
-        const c = palette[i % palette.length];
-        colors[i*3]=c.r; colors[i*3+1]=c.g; colors[i*3+2]=c.b;
-      }
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-      const mat = new THREE.PointsMaterial({size:3, vertexColors:true, transparent:true, opacity:0.5, sizeAttenuation:true});
-      const points = new THREE.Points(geo, mat);
-      scene.add(points);
-
-      /* a handful of drifting wireframe shapes spread down the page's world-space,
-         so distinct geometry comes into frame as the user scrolls, not just particles */
-      const shapeDefs = isSmall ? [
-        {geo:()=>new THREE.OctahedronGeometry(60,0), color:COL_ACCENT, x:-260, y:-200, z:-300},
-        {geo:()=>new THREE.DodecahedronGeometry(55,0), color:COL_GOLD, x:280, y:400, z:-260},
-        {geo:()=>new THREE.TorusGeometry(70,20,8,24), color:COL_ACCENT, x:-240, y:900, z:-320},
-      ] : [
-        {geo:()=>new THREE.OctahedronGeometry(70,0), color:COL_ACCENT, x:-420, y:-260, z:-320},
-        {geo:()=>new THREE.DodecahedronGeometry(60,0), color:COL_GOLD, x:460, y:180, z:-260},
-        {geo:()=>new THREE.TetrahedronGeometry(65,0), color:COL_ACCENT, x:-380, y:620, z:-360},
-        {geo:()=>new THREE.TorusGeometry(85,22,8,28), color:COL_GOLD, x:420, y:1000, z:-300},
-        {geo:()=>new THREE.IcosahedronGeometry(55,0), color:COL_ACCENT, x:-320, y:1420, z:-280},
-        {geo:()=>new THREE.OctahedronGeometry(60,0), color:COL_GOLD, x:380, y:1850, z:-320},
-      ];
-      const shapes = shapeDefs.map((d,i)=>{
-        const mesh = new THREE.Mesh(d.geo(), new THREE.MeshBasicMaterial({color:d.color, wireframe:true, transparent:true, opacity:0.4}));
-        mesh.position.set(d.x, d.y, d.z);
-        mesh.userData = {
-          baseY: d.y,
-          spinX: (Math.random()*0.6+0.2) * 0.004 * (i%2===0 ? 1 : -1),
-          spinY: (Math.random()*0.6+0.3) * 0.004 * (i%2===0 ? -1 : 1),
-          bobAmp: 22 + (i%3)*6,
-          bobSpeed: 1500 + i*180,
-          phase: i*1.3,
-          parallax: 0.55 + (i%3)*0.12
-        };
-        scene.add(mesh);
-        return mesh;
-      });
-
-      function resize(){
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth/window.innerHeight;
-        camera.updateProjectionMatrix();
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      function tick(){
-        const sf = window.__scrollFrac || 0;
-        const now = Date.now();
-
-        points.rotation.y += 0.0006 + sf*0.0022;
-        points.rotation.x += 0.0002;
-        points.position.y = sf * 420;
-
-        shapes.forEach(m=>{
-          const u = m.userData;
-          m.rotation.x += u.spinX;
-          m.rotation.y += u.spinY;
-          m.position.y = u.baseY - sf * 2600 * u.parallax + Math.sin(now/u.bobSpeed + u.phase) * u.bobAmp;
-        });
-
-        camera.position.z = 480 - sf*180;
-        camera.position.x += (mx*36 - camera.position.x) * 0.02;
-        camera.position.y += (-my*36 - camera.position.y) * 0.02;
-        camera.rotation.z += (sf*0.03 - camera.rotation.z) * 0.02;
-        camera.lookAt(0, 0, 0);
-        renderer.render(scene, camera);
-      }
-      return {tick};
-    })();
-
-    /* ---------------- Hero: wireframe geometry cluster ---------------- */
-    const hero = (()=>{
-      const canvas = document.getElementById('hero-3d');
-      const header = document.querySelector('header.hero');
-      if(!canvas || !header) return null;
-      const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-      camera.position.set(0, 0, 9);
-
-      const group = new THREE.Group();
-
-      const ico = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(2.2, 1),
-        new THREE.MeshBasicMaterial({color:COL_ACCENT, wireframe:true, transparent:true, opacity:0.5})
-      );
-      ico.position.set(2.6, 0.5, 0);
-      group.add(ico);
-
-      const knot = new THREE.Mesh(
-        new THREE.TorusKnotGeometry(0.62, 0.18, 110, 14),
-        new THREE.MeshBasicMaterial({color:COL_GOLD, wireframe:true, transparent:true, opacity:0.35})
-      );
-      knot.position.set(-3.7, -2.3, -2.4);
-      group.add(knot);
-
-      scene.add(group);
-
-      function resize(){
-        const w = header.clientWidth, h = header.clientHeight;
-        renderer.setSize(w, h);
-        camera.aspect = w/h;
-        camera.updateProjectionMatrix();
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      function tick(){
-        const sf = window.__scrollFrac || 0;
-        ico.rotation.x += 0.0026;
-        ico.rotation.y += 0.0035;
-        knot.rotation.x -= 0.0018;
-        knot.rotation.y += 0.0022;
-        group.rotation.y += (mx*0.35 - group.rotation.y) * 0.03;
-        group.rotation.x += (-my*0.2 + sf*0.5 - group.rotation.x) * 0.03;
-        group.position.y = sf * 1.6;
-        renderer.render(scene, camera);
-      }
-      return {tick};
-    })();
-
-    /* ---------------- Footer: rotating knot + drifting particles ---------------- */
+    /* ---------------- Footer: rotating knot + drifting particles (unchanged) ---------------- */
     const footerScene = (()=>{
       const canvas = document.getElementById('footer-3d');
       const footerEl = document.querySelector('footer');
@@ -969,15 +1011,15 @@
       return {tick};
     })();
 
-    const layers = [bg, hero, footerScene].filter(Boolean);
-
-    if(prefersReduced){
-      layers.forEach(l => l.tick());
-    } else {
-      (function loop(){
-        if(!docHidden) layers.forEach(l => l.tick());
-        requestAnimationFrame(loop);
-      })();
+    if(footerScene){
+      if(prefersReduced){
+        footerScene.tick();
+      } else {
+        (function loop(){
+          if(!docHidden) footerScene.tick();
+          requestAnimationFrame(loop);
+        })();
+      }
     }
   }
 </script>
