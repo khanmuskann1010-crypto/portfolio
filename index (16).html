@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muskan K. — Growth &amp; Marketing Communications</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF6;
+    --ink:#15140F;
+    --accent:#0F6B4F;
+    --gold:#F1AE12;
+    --line:rgba(21,20,15,0.13);
+    --muted:rgba(21,20,15,0.6);
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--accent); color:var(--paper);}
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+
+  nav{position:fixed; top:0; left:0; right:0; z-index:200; display:flex; justify-content:space-between; align-items:center; padding:18px 28px;}
+  nav .mark{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; color:var(--paper); letter-spacing:0.04em; background:var(--ink); padding:9px 16px; border-radius:20px; border:1.5px solid var(--ink);}
+  nav .mark b{color:var(--accent);}
+  nav .progress-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink); letter-spacing:0.08em; text-transform:uppercase; background:var(--paper); padding:9px 14px; border-radius:20px; border:1.5px solid var(--ink);}
+  #progress-bar{position:fixed; top:0; left:0; height:3px; background:var(--accent); width:0%; z-index:300; transition:width .08s linear;}
+
+  header.hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 32px 80px; position:relative; overflow:hidden; isolation:isolate;}
+  .hero-noise{position:absolute; inset:0; z-index:-3; opacity:.35; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");}
+  .hero-wordmark{position:absolute; z-index:-2; top:52%; left:50%; transform:translate(-50%,-50%); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:min(30vw,420px); line-height:1; letter-spacing:-0.03em; white-space:nowrap; color:transparent; -webkit-text-stroke:1.5px rgba(21,20,15,0.09); user-select:none; pointer-events:none;}
+  .hero-frame{position:absolute; inset:18px; border:1px solid var(--line); z-index:-1; pointer-events:none;}
+  .hero-frame::before{content:'MUSKAN K. — PORTFOLIO 2026'; position:absolute; top:-1px; right:0; transform:translateY(-100%); font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.1em; color:var(--muted); padding-bottom:8px;}
+  .hero-orb{position:absolute; z-index:-2; width:520px; height:520px; border-radius:50%; background:conic-gradient(from 120deg at 40% 35%, rgba(15,107,79,0.9), rgba(241,174,18,0.35) 30%, rgba(21,20,15,0.05) 55%, rgba(15,107,79,0.55) 80%, rgba(15,107,79,0.9)); opacity:.55; filter:blur(38px); top:-14%; right:-10%; animation:orbFloat 11s ease-in-out infinite;} .hero-orb2{position:absolute; z-index:-2; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle at 60% 40%, rgba(241,174,18,0.4), transparent 70%); opacity:.4; filter:blur(24px); bottom:6%; left:2%; animation:orbFloat 13s ease-in-out infinite reverse;}
+  @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-18px,26px) scale(1.05);}}
+  .hero-crosshair{position:absolute; z-index:-1; width:14px; height:14px; opacity:.5;}
+  .hero-crosshair::before,.hero-crosshair::after{content:''; position:absolute; background:var(--ink);}
+  .hero-crosshair::before{width:100%; height:1px; top:50%;}
+  .hero-crosshair::after{height:100%; width:1px; left:50%;}
+  .hero-crosshair.c1{bottom:120px; left:36px;}
+  .hero-crosshair.c2{top:120px; left:44%;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:''; width:26px; height:2px; background:var(--accent); display:inline-block;}
+  h1.headline{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(38px,6.6vw,84px); line-height:1.0; letter-spacing:-0.02em; max-width:920px;}
+  h1.headline .line{overflow:hidden; display:block;}
+  h1.headline .line span{display:inline-block; transform:translateY(112%); animation:riseUp .9s cubic-bezier(.22,1,.36,1) forwards;}
+  h1.headline .line:nth-child(1) span{animation-delay:.05s;}
+  h1.headline .line:nth-child(2) span{animation-delay:.18s;}
+  h1.headline .line:nth-child(3) span{animation-delay:.31s;}
+  @keyframes riseUp{to{transform:translateY(0);}}
+  h1.headline em{font-style:italic; color:var(--accent);}
+  .hero-sub{margin-top:28px; max-width:520px; font-size:17px; line-height:1.6; color:var(--muted); opacity:0; animation:fadeUp .9s cubic-bezier(.22,1,.36,1) forwards; animation-delay:.55s;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+  .hero-meta{margin-top:40px; display:flex; gap:12px; flex-wrap:wrap; opacity:0; animation:fadeUp .9s cubic-bezier(.22,1,.36,1) forwards; animation-delay:.72s;}
+  .chip{font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:8px 14px; border-radius:20px; border:1.5px solid var(--ink);}
+  .chip.fill{background:var(--ink); color:var(--paper);}
+  .scroll-cue{position:absolute; bottom:36px; left:32px; display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.08em;}
+  .scroll-cue .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulseDot 1.6s ease-in-out infinite;}
+  @keyframes pulseDot{0%,100%{opacity:.3; transform:scale(.85);} 50%{opacity:1; transform:scale(1.15);}}
+
+  .marquee-band{border-top:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); padding:15px 0; overflow:hidden; white-space:nowrap;}
+  .marquee-track{display:inline-block; animation:scrollLeft 32s linear infinite;}
+  .marquee-track span{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); margin-right:14px; text-transform:uppercase; letter-spacing:.05em;}
+  .marquee-track span.sep{color:var(--accent); margin-right:14px;}
+  @keyframes scrollLeft{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  .section-head{padding:100px 32px 0; max-width:680px; margin:0 auto;}
+  .section-head h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,44px); letter-spacing:-0.01em;}
+  .section-head p{margin-top:14px; color:var(--muted); font-size:15.5px; line-height:1.6; max-width:520px;}
+
+  .rolodex-wrapper{position:relative; height:700vh;}
+  .rolodex-sticky{position:sticky; top:0; height:100vh; overflow:hidden; perspective:1500px; display:flex; align-items:center; justify-content:center;}
+  .rolodex-sticky::before, .rolodex-sticky::after{content:''; position:absolute; left:0; right:0; height:90px; z-index:5; pointer-events:none;}
+  .rolodex-sticky::before{top:0; background:linear-gradient(var(--paper), transparent);}
+  .rolodex-sticky::after{bottom:0; background:linear-gradient(transparent, var(--paper));}
+
+  .placard{
+    position:absolute; top:50%; left:50%; width:min(780px,90vw); height:min(540px,72vh);
+    border-radius:18px; border:1.5px solid rgba(21,20,15,0.1);
+    will-change:transform, opacity; display:grid; grid-template-columns:0.95fr 1.05fr; overflow:hidden;
+    box-shadow:0 40px 90px -25px rgba(21,20,15,0.28), 0 0 0 1px rgba(15,107,79,0.08) inset;
+    background:
+      radial-gradient(circle at 15% 15%, rgba(15,107,79,0.14), transparent 45%),
+      radial-gradient(circle at 88% 90%, rgba(127,214,176,0.3), transparent 50%),
+      radial-gradient(circle at 60% 100%, rgba(241,174,18,0.18), transparent 40%),
+      var(--paper);
+  }
+  .placard::before{
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:0.3; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E");
+  }
+  @media(max-width:720px){ .placard{grid-template-columns:1fr; height:min(660px,80vh);} }
+
+  .placard-text{padding:32px 30px; display:flex; flex-direction:column; position:relative; z-index:2;}
+  .placard-index{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); margin-bottom:10px; letter-spacing:.08em;}
+  .placard-brand{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(22px,2.8vw,30px); letter-spacing:-0.01em;
+    background:linear-gradient(100deg, var(--ink) 15%, var(--accent) 40%, var(--gold) 55%, var(--accent) 70%, var(--ink) 85%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    background-size:250% auto; animation:sheen 6s linear infinite;
+  }
+  @keyframes sheen{ to{ background-position:250% center; } }
+  .placard-dates{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted); margin-top:4px; letter-spacing:.05em;}
+  .placard-role{font-size:12.8px; color:var(--muted); margin-top:10px; margin-bottom:14px; font-style:italic;}
+  .placard-text ul{list-style:none; font-size:12.5px; line-height:1.5; overflow-y:auto;}
+  .placard-text ul li{position:relative; padding-left:15px; margin-bottom:7px;}
+  .placard-text ul li::before{content:'—'; position:absolute; left:0; color:var(--accent);}
+  .placard-stat-row{display:flex; gap:16px; margin-top:auto; padding-top:12px; border-top:1px dashed var(--line); flex-wrap:wrap;}
+  .placard-stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700;}
+  .placard-stat span{font-family:'IBM Plex Mono',monospace; font-size:8.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted);}
+
+  .placard-visual{position:relative; overflow:hidden; background:var(--ink);}
+  .placard-visual img{width:100%; height:100%; object-fit:contain; opacity:1;}
+  .placard-visual .info{position:relative; z-index:1; height:100%; width:100%; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(18px,4%,36px); box-sizing:border-box; color:#FAFAF6; font-family:'Inter',sans-serif; background:linear-gradient(160deg, #17160f 0%, #0d0c09 55%, #050504 100%); overflow:hidden;}
+  .info-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(18px,2.4vw,28px); line-height:1.1;}
+  .info-sub{font-family:'IBM Plex Mono',monospace; font-size:clamp(8.5px,0.95vw,11.5px); color:#F1AE12; letter-spacing:.07em; margin-top:6px; text-transform:uppercase;}
+  .info-divider{height:1px; background:rgba(250,250,246,0.12); margin:clamp(8px,1.6%,16px) 0; flex-shrink:0;}
+  .info-row{display:flex; gap:clamp(14px,3%,28px); flex-wrap:wrap;}
+  .info-stat b{display:block; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(20px,3vw,36px); background:linear-gradient(90deg,#0F6B4F,#F1AE12); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; line-height:1;}
+  .info-stat span{display:block; font-family:'IBM Plex Mono',monospace; font-size:clamp(7.5px,0.78vw,9.5px); color:rgba(250,250,246,0.55); letter-spacing:.04em; margin-top:5px;}
+  .info-label{font-family:'IBM Plex Mono',monospace; font-size:clamp(8px,0.85vw,10px); color:#F1AE12; letter-spacing:.07em; text-transform:uppercase; margin-bottom:clamp(6px,1.2%,10px);}
+  .info-bars{display:flex; flex-direction:column; gap:clamp(5px,1.2%,10px); justify-content:center; flex:1; min-height:0;}
+  .info-bar-row{display:flex; align-items:center; gap:10px;}
+  .info-bar-row span{font-size:clamp(9px,1vw,12px); width:38%; flex-shrink:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .info-bar-track{flex:1; height:6px; border-radius:4px; background:rgba(250,250,246,0.08); overflow:hidden;}
+  .info-bar-fill{height:100%; border-radius:4px; background:linear-gradient(90deg,#0F6B4F,#F1AE12);}
+  .info-cards{display:flex; flex-direction:column; gap:clamp(6px,1.4%,10px); flex:1; min-height:0; justify-content:center;}
+  .info-card{border:1.3px solid #0F6B4F; background:rgba(15,107,79,0.15); border-radius:10px; padding:clamp(7px,1.4%,12px) clamp(10px,2%,16px);}
+  .info-card b{display:block; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(10px,1.1vw,13px);}
+  .info-card span{display:block; font-size:clamp(8.5px,0.9vw,10.5px); color:rgba(250,250,246,0.65); margin-top:2px; line-height:1.3;}
+  .info-footer{font-family:'IBM Plex Mono',monospace; font-size:clamp(7.5px,0.78vw,9.5px); color:rgba(250,250,246,0.4); letter-spacing:.04em; text-transform:uppercase; flex-shrink:0;}
+
+  .placard-visual .veil{position:absolute; inset:0; background:linear-gradient(155deg, rgba(21,20,15,0.15) 0%, rgba(21,20,15,0.35) 38%, rgba(15,107,79,0.32) 68%, rgba(21,20,15,0.85) 100%); mix-blend-mode:multiply;} .placard-visual::after{content:''; position:absolute; inset:0; background:radial-gradient(circle at 78% 12%, rgba(241,174,18,0.5), transparent 55%); mix-blend-mode:screen; pointer-events:none;}
+  .placard-visual .cap{position:absolute; bottom:14px; left:16px; right:16px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:rgba(250,250,246,.9); letter-spacing:.03em; z-index:2;}
+  .placard-badge{position:absolute; top:14px; left:16px; background:var(--accent); color:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:9px; padding:5px 10px; border-radius:12px; z-index:3; letter-spacing:.04em; font-weight:500;}
+
+  .rolo-nav{position:absolute; bottom:26px; left:0; right:0; display:flex; justify-content:center; gap:9px; z-index:10;}
+  .rolo-dot{width:9px; height:9px; border-radius:50%; border:1.5px solid var(--ink); background:transparent; cursor:pointer; transition:all .3s;}
+  .rolo-dot.active{background:var(--accent); border-color:var(--accent); transform:scale(1.25);}
+  .rolo-hint{position:absolute; top:24px; left:0; right:0; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); z-index:10;}
+
+  .proof-grid{max-width:1000px; margin:56px auto 0; padding:0 32px; display:grid; grid-template-columns:1fr; gap:14px;}
+  @media(min-width:720px){.proof-grid{grid-template-columns:1fr 1fr;}}
+  .proof-item{border:1.5px solid var(--ink); border-radius:14px; padding:22px 22px; display:flex; flex-direction:column; gap:6px; text-decoration:none; transition:transform .25s, background .25s;}
+  .proof-item:hover{background:var(--ink); color:var(--paper); transform:translateY(-3px);}
+  .proof-item:hover .proof-kicker{color:var(--accent);}
+  .proof-kicker{font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);}
+  .proof-title{font-family:'Space Grotesk',sans-serif; font-size:16.5px; font-weight:600; line-height:1.3;}
+  .proof-source{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:2px;}
+  .proof-item:hover .proof-source{color:rgba(250,250,246,.65);}
+  .proof-arrow{margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:11px;}
+
+  .section{padding:100px 32px;}
+  .split{max-width:1000px; margin:56px auto 0; display:grid; grid-template-columns:1fr; gap:20px;}
+  @media(min-width:760px){.split{grid-template-columns:1fr 1fr;}}
+  .card{border:1.5px solid var(--ink); border-radius:14px; padding:28px; background:var(--paper);}
+  .card .tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px; display:inline-block;}
+  .card h3{font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; margin-bottom:8px;}
+  .card p{font-size:14px; line-height:1.6; color:var(--muted); margin-bottom:8px;}
+  .press-quote{font-family:'Space Grotesk',sans-serif; font-size:16.5px; line-height:1.45; margin:12px 0; font-weight:500;}
+  .press-link{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--accent); text-decoration:none; border-bottom:1.5px solid var(--accent);}
+  .cert-badge{display:flex; align-items:center; gap:12px; margin-top:14px; padding:12px 14px; border:1.5px solid var(--accent); border-radius:10px; background:rgba(15,107,79,0.06);}
+  .cert-badge .cert-icon{width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--paper); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; flex-shrink:0;}
+  .cert-badge .cert-text{font-family:'IBM Plex Mono',monospace; font-size:11px; line-height:1.5; letter-spacing:.02em;}
+  .cert-badge .cert-text b{display:block; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; letter-spacing:0; margin-bottom:1px;}
+
+  footer{padding:130px 32px 70px; text-align:center; position:relative; background:var(--ink); color:var(--paper); margin-top:40px;}
+  footer h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,6vw,62px); letter-spacing:-0.02em; max-width:740px; margin:0 auto 32px;}
+  footer h2 em{color:var(--accent); font-style:italic;}
+  .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-btn{font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase; padding:14px 26px; border-radius:30px; border:1.5px solid var(--paper); color:var(--paper); text-decoration:none; transition:all .25s;}
+  .cta-btn.primary{background:var(--accent); border-color:var(--accent); color:var(--ink); font-weight:600;}
+  .cta-btn:hover{transform:translateY(-3px);}
+  footer .foot-note{margin-top:70px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(250,250,246,.4); letter-spacing:.05em;}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<nav>
+  <span class="mark">MUSKAN <b>K.</b></span>
+  <span class="progress-label" id="nav-progress">SCROLL 00%</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-wordmark">MUSKAN</div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-frame"></div>
+  <div class="hero-crosshair c1"></div>
+  <div class="hero-crosshair c2"></div>
+  <div class="eyebrow">Growth &amp; Marketing Communications</div>
+  <h1 class="headline">
+    <span class="line"><span>Four chapters of</span></span>
+    <span class="line"><span>turning attention into <em>growth</em>,</span></span>
+    <span class="line"><span>across three countries.</span></span>
+  </h1>
+  <p class="hero-sub">From performance-driven B2B growth in India to multi-brand marketing leadership in Paris — flip through the chapters below.</p>
+  <div class="hero-meta">
+    <span class="chip fill">MBA Candidate, EMLV Paris</span>
+    <span class="chip">Based in Paris</span>
+    <span class="chip">DeltaX → Kraftshala → Freelance → L2R</span>
+  </div>
+  <div class="scroll-cue"><span class="dot"></span> SCROLL TO FLIP THROUGH THE CHAPTERS</div>
+</header>
+
+<div class="marquee-band">
+  <div class="marquee-track" id="marquee">
+    <span>ABM</span><span class="sep">•</span><span>GTM Strategy</span><span class="sep">•</span><span>SEO</span><span class="sep">•</span>
+    <span>Brevo</span><span class="sep">•</span><span>HubSpot</span><span class="sep">•</span><span>WordPress / Elementor</span><span class="sep">•</span>
+    <span>HTML / CSS</span><span class="sep">•</span><span>Salesforce</span><span class="sep">•</span><span>Meta Ads Manager</span><span class="sep">•</span>
+    <span>Google Ads</span><span class="sep">•</span><span>CTR / CAC / ROAS</span><span class="sep">•</span><span>LinkedIn Sales Navigator</span><span class="sep">•</span>
+  </div>
+</div>
+
+<div class="section-head">
+  <div class="eyebrow">The Journey</div>
+  <h2>Flip through the chapters.</h2>
+  <p>Four roles, four chapters — keep scrolling and each one rotates into place.</p>
+</div>
+
+<div class="rolodex-wrapper" id="rolo-wrapper">
+  <div class="rolodex-sticky">
+    <div class="rolo-hint">Scroll to advance</div>
+
+    <div class="placard" data-i="0">
+      <div class="placard-text">
+        <div class="placard-index">01 / 05</div>
+        <div class="placard-brand">DeltaX</div>
+        <div class="placard-dates">JUN 2021 — JUL 2022 · GROWTH MARKETING SPECIALIST</div>
+        <div class="placard-role">Foundation in performance-driven B2B growth &amp; branding</div>
+        <ul>
+          <li>Ran ABM &amp; demand-gen campaigns for Amazon Marketing Services, landing meetings with Lakmé, Johnson's, Campus Sutra.</li>
+          <li>Built growth marketing content &amp; pitch decks for SaaS/AdTech products.</li>
+          <li>Supported the BizGain SaaS launch across a 10–15 person team, onboarding 20+ SMEs.</li>
+        </ul>
+        <div class="cert-badge">
+          <div class="cert-icon">✓</div>
+          <div class="cert-text"><b>Certified AdTech Specialist</b>DeltaX, 2022</div>
+        </div>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Ruby + Grand Prix</b><span>YouTube Works Awards India '21</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">DeltaX &middot; Client Roster</div>
+            <div class="info-sub">Amazon Marketing Services &middot; Lakm&eacute; &middot; Johnson's &middot; Campus Sutra</div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-row">
+            <div class="info-stat"><b>20+</b><span>SMES ONBOARDED — BIZGAIN LAUNCH</span></div>
+            <div class="info-stat"><b>10&ndash;15</b><span>PERSON TEAM SUPPORTED</span></div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Focus areas</div>
+            <div class="info-bars">
+              <div class="info-bar-row"><span>ABM Campaigns</span><div class="info-bar-track"><div class="info-bar-fill" style="width:88%"></div></div></div>
+              <div class="info-bar-row"><span>Pitch Decks</span><div class="info-bar-track"><div class="info-bar-fill" style="width:80%"></div></div></div>
+              <div class="info-bar-row"><span>Content Strategy</span><div class="info-bar-track"><div class="info-bar-fill" style="width:60%"></div></div></div>
+              <div class="info-bar-row"><span>SaaS Launch Support</span><div class="info-bar-track"><div class="info-bar-fill" style="width:69%"></div></div></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">Ruby + Grand Prix &mdash; YouTube Works Awards India '21</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="1">
+      <div class="placard-text">
+        <div class="placard-index">02 / 05</div>
+        <div class="placard-brand">Kraftshala</div>
+        <div class="placard-dates">FEB 2023 — FEB 2025 · SENIOR MARKETING EXECUTIVE</div>
+        <div class="placard-role">Promoted within 12 months — scale, B2C growth &amp; revenue</div>
+        <ul>
+          <li>Managed end-to-end marketing &amp; sales funnels, optimising lead-to-conversion workflows.</li>
+          <li>Counselled &amp; onboarded 3,000+ B2C clients through personalised engagement.</li>
+          <li>Co-executed GTM launches for two flagship programs: Marketing Launchpad &amp; Sales &amp; Business Leadership.</li>
+          <li>Tracked CTR, conversion rate, CAC and ROAS to refine targeting.</li>
+        </ul>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>₹30M+</b><span>Revenue / 2yrs</span></div>
+          <div class="placard-stat"><b>3,000+</b><span>Clients onboarded</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Kraftshala &middot; Program Launches</div>
+            <div class="info-sub">Promoted within 12 months &middot; EdTech SaaS</div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-row">
+            <div class="info-stat"><b>&#8377;30M+</b><span>REVENUE / 2 YEARS</span></div>
+            <div class="info-stat"><b>3,000+</b><span>CLIENTS ONBOARDED</span></div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Programs co-executed</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Marketing Launchpad</b><span>Flagship GTM launch, end-to-end funnel ownership</span></div>
+              <div class="info-card"><b>Sales &amp; Business Leadership</b><span>Flagship GTM launch, cross-functional execution</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">CTR &middot; Conversion &middot; CAC &middot; ROAS tracked</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="2">
+      <div class="placard-text">
+        <div class="placard-index">03 / 05</div>
+        <div class="placard-brand">Freelance</div>
+        <div class="placard-dates">FEB 2025 — JUL 2025 · PERSONAL BRANDING &amp; LINKEDIN SPECIALIST</div>
+        <div class="placard-role">Independent consulting for executive presence</div>
+        <ul>
+          <li>Supported CEOs &amp; senior executives with LinkedIn profile strategy.</li>
+          <li>Conducted profile audits, identifying gaps in positioning, content &amp; visibility.</li>
+          <li>Advised on personal branding strategy to strengthen executive presence.</li>
+        </ul>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>6K+</b><span>LinkedIn followers</span></div>
+          <div class="placard-stat"><b>1M+</b><span>Impressions</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Freelance &middot; Executive Clients</div>
+            <div class="info-sub">CEOs &amp; senior executives &middot; LinkedIn strategy</div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-row">
+            <div class="info-stat"><b>6K+</b><span>LINKEDIN FOLLOWERS</span></div>
+            <div class="info-stat"><b>1M+</b><span>IMPRESSIONS GENERATED</span></div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Service scope</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Profile Audits</b><span>Gaps in positioning, content &amp; visibility</span></div>
+              <div class="info-card"><b>Personal Branding Strategy</b><span>Strengthening executive presence</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">Executive presence, built from scratch</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="3">
+      <div class="placard-text">
+        <div class="placard-index">04 / 05</div>
+        <div class="placard-brand">L2R Partners</div>
+        <div class="placard-dates">JUL 2026 — PRESENT · MARKETING COMMS PROJECT MANAGER</div>
+        <div class="placard-role">Les Financiers &amp; Adminify Office — multi-brand leadership</div>
+        <ul>
+          <li>Own end-to-end website, SEO &amp; marketing delivery across two affiliated brands.</li>
+          <li>Rebuilt &amp; maintain both sites — WordPress/Elementor and static HTML/CSS.</li>
+          <li>Run monthly campaigns: social calendars, Brevo email flows, execution calendars.</li>
+          <li>Primary liaison between leadership and execution team.</li>
+        </ul>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>2 brands</b><span>One system</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">L2R Partners &middot; Multi-Brand</div>
+            <div class="info-sub">Les Financiers &amp; Adminify Office</div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-row">
+            <div class="info-stat"><b>2</b><span>AFFILIATED BRANDS, ONE SYSTEM</span></div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Platforms owned</div>
+            <div class="info-bars">
+              <div class="info-bar-row"><span>WordPress / Elementor</span><div class="info-bar-track"><div class="info-bar-fill" style="width:71%"></div></div></div>
+              <div class="info-bar-row"><span>Static HTML / CSS</span><div class="info-bar-track"><div class="info-bar-fill" style="width:78%"></div></div></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">SEO, website &amp; marketing delivery owner</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="placard" data-i="4">
+      <div class="placard-text">
+        <div class="placard-index">05 / 05</div>
+        <div class="placard-brand">Adminify Office</div>
+        <div class="placard-dates">2026 &middot; FULL WEBSITE BUILD &amp; DEPLOYMENT</div>
+        <div class="placard-role">End-to-end site — built, launched &amp; deployed solo</div>
+        <ul>
+          <li>Designed &amp; coded the full site end-to-end: homepage, services, partners, pricing, careers/missions pages.</li>
+          <li>Built and shipped a 5-tier freelancer pricing structure and a separate 4-tier corporate pricing structure.</li>
+          <li>Handled deployment directly &mdash; FTP publishing, legal pages, favicon, email authentication (SPF/DKIM/DMARC).</li>
+          <li>Owns ongoing maintenance and iteration on the live static HTML/CSS site.</li>
+        </ul>
+        <div class="placard-stat-row">
+          <div class="placard-stat"><b>Solo build</b><span>Design to deploy</span></div>
+          <div class="placard-stat"><b>7+ pages</b><span>Shipped live</span></div>
+        </div>
+      </div>
+      <div class="placard-visual">
+        <div class="info">
+          <div>
+            <div class="info-title">Adminify Office &middot; Site Build</div>
+            <div class="info-sub">Back Office as a Service &middot; built &amp; deployed solo</div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-row">
+            <div class="info-stat"><b>7+</b><span>PAGES DESIGNED &amp; SHIPPED</span></div>
+            <div class="info-stat"><b>9</b><span>PRICING TIERS BUILT</span></div>
+          </div>
+          <div class="info-divider"></div>
+          <div>
+            <div class="info-label">Build &amp; deploy scope</div>
+            <div class="info-cards">
+              <div class="info-card"><b>Design to Code</b><span>Homepage, services, partners, pricing, missions</span></div>
+              <div class="info-card"><b>Live Deployment</b><span>FTP publishing, legal pages, favicon, email auth</span></div>
+            </div>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-footer">End-to-end owner, design through deployment</div>
+        </div>
+        <div class="veil"></div>
+      </div>
+    </div>
+
+    <div class="rolo-nav" id="rolo-nav"></div>
+  </div>
+</div>
+
+<main>
+
+<section class="section" style="padding-bottom:20px;">
+  <div class="section-head" style="padding-top:0; margin-bottom:0;">
+    <div class="eyebrow">Social Proof</div>
+    <h2>Proof, in public.</h2>
+    <p>Where this work has been written about, awarded, or is live for anyone to see.</p>
+  </div>
+  <div class="proof-grid">
+
+    <a class="proof-item" href="https://www.afaqs.com/news/advertising/winners-of-youtube-works-awards-india-2021-announced" target="_blank">
+      <span class="proof-kicker">Award coverage — DeltaX</span>
+      <span class="proof-title">Winners of YouTube Works Awards India 2021</span>
+      <span class="proof-source">afaqs.com</span>
+      <span class="proof-arrow">Read the coverage ↗</span>
+    </a>
+
+    <a class="proof-item" href="https://www.ogilvyasia.com/news-bites/ogilvy-and-wavemaker-india-win-the-grand-prix-for-cadbury-celebrations-not-just-a-cadbury-ad/" target="_blank">
+      <span class="proof-kicker">Award coverage — DeltaX</span>
+      <span class="proof-title">Ogilvy &amp; Wavemaker India win the Grand Prix for "Not Just A Cadbury Ad"</span>
+      <span class="proof-source">ogilvyasia.com</span>
+      <span class="proof-arrow">Read the coverage ↗</span>
+    </a>
+
+    <a class="proof-item" href="https://www.bweducation.com/article/kraftshala-marketing-launchpad-program-400073" target="_blank">
+      <span class="proof-kicker">Program press — Kraftshala</span>
+      <span class="proof-title">Kraftshala Marketing Launchpad Program</span>
+      <span class="proof-source">bweducation.com</span>
+      <span class="proof-arrow">Read the coverage ↗</span>
+    </a>
+
+    <a class="proof-item" href="https://www.mediainfoline.com/education/kraftshala-launches-a-specialised-pg-program-for-sales-marketing-and-business-leadership" target="_blank">
+      <span class="proof-kicker">Program press — Kraftshala</span>
+      <span class="proof-title">Kraftshala launches PG Program for Sales, Marketing &amp; Business Leadership</span>
+      <span class="proof-source">mediainfoline.com</span>
+      <span class="proof-arrow">Read the coverage ↗</span>
+    </a>
+
+    <a class="proof-item" href="https://www.linkedin.com/in/muskan-k-3176b6194/" target="_blank">
+      <span class="proof-kicker">Personal brand — Freelance</span>
+      <span class="proof-title">LinkedIn profile — 6K+ followers, 1M+ impressions</span>
+      <span class="proof-source">linkedin.com</span>
+      <span class="proof-arrow">View profile ↗</span>
+    </a>
+
+    <a class="proof-item" href="https://www.les-financiers.fr" target="_blank">
+      <span class="proof-kicker">Built &amp; managed — L2R Partners</span>
+      <span class="proof-title">Les Financiers — recruitment consultancy website</span>
+      <span class="proof-source">les-financiers.fr</span>
+      <span class="proof-arrow">Visit the live site ↗</span>
+    </a>
+
+    <a class="proof-item" href="https://www.adminify-office.com" target="_blank">
+      <span class="proof-kicker">Built &amp; managed — L2R Partners</span>
+      <span class="proof-title">Adminify Office — Back Office as a Service platform</span>
+      <span class="proof-source">adminify-office.com</span>
+      <span class="proof-arrow">Visit the live site ↗</span>
+    </a>
+
+    <a class="proof-item" href="https://www.emlv.fr/en/studying-in-the-heart-of-europes-business-hub-muskans-mba-journey-at-emlv/" target="_blank">
+      <span class="proof-kicker">Featured press — EMLV</span>
+      <span class="proof-title">Studying in the Heart of Europe's Business Hub: Muskan's MBA Journey at EMLV</span>
+      <span class="proof-source">emlv.fr</span>
+      <span class="proof-arrow">Read the feature ↗</span>
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head" style="padding-top:0; margin-bottom:0;">
+    <div class="eyebrow">Foundations</div>
+    <h2>Education.</h2>
+  </div>
+  <div class="split">
+    <div class="card">
+      <span class="tag">Currently</span>
+      <h3>MBA Candidate</h3>
+      <p>EMLV Business School, Paris — De Vinci Higher Education. Since October 2025, specialising in Marketing.</p>
+      <p style="font-size:12.5px;">Coursework: Global Strategy · International Digital Marketing · Salesforce Management · HTML/CSS · Digital Transformation</p>
+      <p style="font-size:12.5px; color:var(--ink); font-weight:600;">B.Com — University of Delhi</p>
+    </div>
+    <div class="card">
+      <span class="tag">Languages &amp; Certifications</span>
+      <h3>Grounded across markets</h3>
+      <p style="font-size:12.5px;">English (C2) · French (A2) · Hindi (Native) · Urdu (Native)</p>
+      <div class="cert-badge">
+        <div class="cert-icon">✓</div>
+        <div class="cert-text"><b>Certified AdTech Specialist</b>DeltaX, 2022</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="eyebrow" style="justify-content:center; color:var(--accent);">Let's talk growth</div>
+  <h2>Ready for the <em>next</em> chapter.</h2>
+  <div class="cta-row">
+    <a class="cta-btn primary" href="https://www.linkedin.com/in/muskan-k-3176b6194/" target="_blank">LinkedIn ↗</a>
+    <a class="cta-btn" href="mailto:khanmuskann1010@gmail.com">Email</a>
+  </div>
+  <div class="foot-note">MUSKAN K. — PARIS, FRANCE — © 2026</div>
+</footer>
+
+<script>
+  const progressBar = document.getElementById('progress-bar');
+  const navProgress = document.getElementById('nav-progress');
+
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, Math.max(0, (scrollTop/docHeight)*100));
+    progressBar.style.width = pct + '%';
+    navProgress.textContent = 'SCROLL ' + String(Math.round(pct)).padStart(2,'0') + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const wrapper = document.getElementById('rolo-wrapper');
+  const placards = Array.from(document.querySelectorAll('.placard'));
+  const navEl = document.getElementById('rolo-nav');
+  const n = placards.length;
+
+  placards.forEach((_,i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'rolo-dot' + (i===0 ? ' active':'');
+    dot.addEventListener('click', ()=>{
+      const rect = wrapper.getBoundingClientRect();
+      const wrapperTop = rect.top + window.scrollY;
+      const scrollable = wrapper.offsetHeight - window.innerHeight;
+      window.scrollTo({top: wrapperTop + (i/(n-1))*scrollable, behavior:'smooth'});
+    });
+    navEl.appendChild(dot);
+  });
+  const dots = Array.from(navEl.children);
+
+  function updateRolodex(){
+    const rect = wrapper.getBoundingClientRect();
+    const scrollable = wrapper.offsetHeight - window.innerHeight;
+    let scrolled = -rect.top;
+    scrolled = Math.min(scrollable, Math.max(0, scrolled));
+    const progress = scrollable > 0 ? (scrolled/scrollable) * (n-1) : 0;
+
+    placards.forEach((card, i)=>{
+      const diff = i - progress;
+      const absDiff = Math.min(Math.abs(diff), 2.2);
+      const offsetPx = diff * 400;
+      const rotateY = diff * -30;
+      const translateZ = -absDiff * 150;
+      const scale = 1 - absDiff * 0.16;
+      const opacity = Math.max(0, 1 - absDiff/1.7);
+      card.style.transform = `translate(-50%,-50%) translateX(${offsetPx}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+      card.style.opacity = opacity.toFixed(2);
+      card.style.zIndex = 100 - Math.round(absDiff*10);
+      card.style.pointerEvents = absDiff < 0.5 ? 'auto' : 'none';
+    });
+
+    const activeIdx = Math.round(Math.max(0, Math.min(n-1, progress)));
+    dots.forEach((d,i)=> d.classList.toggle('active', i===activeIdx));
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){
+      requestAnimationFrame(()=>{ updateRolodex(); ticking=false; });
+      ticking = true;
+    }
+  }, {passive:true});
+  window.addEventListener('resize', updateRolodex);
+  updateRolodex();
+
+  const marquee = document.getElementById('marquee');
+  marquee.innerHTML += marquee.innerHTML;
+</script>
+
+</body>
+</html>
